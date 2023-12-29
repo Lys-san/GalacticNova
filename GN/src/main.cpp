@@ -1,16 +1,4 @@
-#define GLIMAC_GL_CHECK_WARNING
-
-#include <GL/glew.h>
-#include <algorithm>
-#include <array>
-#include <glimac/Image.hpp>
-#include <glimac/Program.hpp>
-#include <glimac/SDLWindowManager.hpp>
-#include <glimac/Sphere.hpp>
-#include <glimac/FreeflyCamera.hpp>
-#include <iostream>
-#include <memory>
-#include <tuple>
+#include "visualizer.h"
 
 using namespace glimac;
 
@@ -98,8 +86,7 @@ struct MoonProgram {
     GLIMAC_CHECK_GLINT(m_uTexture_ref      = glGetUniformLocation(m_program.getGLId(), "uTexture"));
   }
 
-  void use()
-  {
+  void use() {
     m_program.use();
     glUniform1i(m_uTexture_ref, 0); // Moon texture is binded to Texture Unit 0
   }
@@ -112,19 +99,18 @@ struct MoonProgram {
   }
 };
 
-static std::unique_ptr<Image> _loadImage(
-  const FilePath& filepath
-)
-{
+static std::unique_ptr<Image> _loadImage(const FilePath& filepath) {
   std::unique_ptr<Image> image = loadImage(filepath);
+
   if (nullptr == image) {
     throw std::runtime_error("Unable to load image (from file " + std::string(filepath) + ")");
   }
+
   return image;
 }
 
-int main(int argc, char** argv)
-{
+int main(int argc, char** argv) {
+
   // Initialize SDL and open a window
   uint32_t window_width  = 800u;
   uint32_t window_height = 600u;
@@ -147,9 +133,13 @@ int main(int argc, char** argv)
   /*********************************
    * HERE SHOULD COME THE INITIALIZATION CODE
    *********************************/
+
+  Visualizer visualizer;
   FilePath application_path(argv[0]);
 
   // Textures loading
+  visualizer.loadTextures(application_path);
+
   std::unique_ptr<Image> earth_map_img = _loadImage(
     application_path.dirPath() + "../../assets/textures/EarthMap.jpg"
   );

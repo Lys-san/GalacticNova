@@ -22,7 +22,7 @@ Compilation errors will occur if those are not found.
 
 In the project root folder :
 
-**1 - Create ``build`` folder if it doesn't exists
+**1 - Create ``build`` folder if it doesn't exists**
 ```
 mkdir build
 ```
