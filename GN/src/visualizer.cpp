@@ -1,22 +1,22 @@
 #include "visualizer.h"
 
-Visualizer::initGlew() {
+void Visualizer::initGlew() {
 
 }
 
-void Visualizer::loadImages(const FilePath &filePath) {
+void Visualizer::loadTextureImages(const FilePath &filePath) {
 	using dirIterator = std::filesystem::recursive_directory_iterator;
 	auto path = filePath.dirPath() + "../../assets/textures/";
 
 	for(const auto& dirEntry : dirIterator(path)) {
-		_textureImages.emplace_back(loadImahe(dirEntry));
+		_textureImages.emplace_back(loadImage(dirEntry));
 		std::cout << "Loaded " << dirEntry << std::endl;
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 
-static std::unique_ptr<Image> Visualizer::loadImage(const FilePath &filepath) {
+static void std::unique_ptr<Image> Visualizer::loadImage(const FilePath &filepath) {
 	std::unique_ptr<Image> image = loadImage(filepath);
 
 	if (nullptr == image) {

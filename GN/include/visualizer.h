@@ -22,6 +22,9 @@
 
 #include <filesystem>
 
+using namespace glimac;
+
+
 /** Visualizer */
 class Visualizer {
 public:
@@ -31,10 +34,10 @@ public:
 	~Visualizer();
 
 	/** initializes glew for OpenGL3+ support*/
-	static initGlew();
+	static void initGlew();
 
 	/** Loads and stores images contained in the assets/texture folder. */
-	void loadImages(const FilePath &filepath);
+	void loadTextureImages(const FilePath &filepath);
 
 private:
 	static std::unique_ptr<Image> loadImage(const FilePath &filepath);
@@ -46,7 +49,7 @@ private:
 	const uint _height;
 
 	// texture images vector
-	std::vector<std::unique_ptr<Image>> _textureImages
-}
+	std::vector<std::unique_ptr<Image>> _textureImages;
+};
 
 #endif // VISU_H
