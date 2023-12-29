@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/GN_exo1_trackball.dir/exo1_trackball.cpp.o -o GN_exo1_trackball  ../glimac/libglimac.a /usr/lib/x86_64-linux-gnu/libSDLmain.a /usr/lib/x86_64-linux-gnu/libSDL.so /usr/lib/x86_64-linux-gnu/libOpenGL.so /usr/lib/x86_64-linux-gnu/libGLX.so /usr/lib/x86_64-linux-gnu/libGLU.so /usr/lib/x86_64-linux-gnu/libGLEW.so 
