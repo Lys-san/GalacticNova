@@ -1,5 +1,5 @@
 /**
- * Author        : Lysandre M. (lysandre.macke@enpc.fr)
+ * Author        : Lysandre M. (lysandre.macke@edu.univ-eiffel.fr)
  * Created       : 12-29-2023
  * Last modified : 12-29-2023 */
 
@@ -20,7 +20,7 @@
 #include <memory>
 #include <tuple>
 
-#include <filesystem>
+// #include <filesystem>
 
 using namespace glimac;
 
@@ -31,7 +31,7 @@ public:
 	Visualizer()                        : _width(800u),  _height(600u)   { };
 	Visualizer(uint width, uint height) : _width(width), _height(height) { };
 
-	~Visualizer();
+	~Visualizer() {};
 
 	/** initializes glew for OpenGL3+ support*/
 	static void initGlew();

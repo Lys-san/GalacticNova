@@ -40,7 +40,7 @@ make
 ```
 **5 - Launch application**
 ```
-./GN/GalacticNova
+./GN/GN_visualizer
 ```
 
 ## Contact

@@ -1,5 +1,18 @@
-#include "visualizer.h"
+#define GLIMAC_GL_CHECK_WARNING
 
+#include <GL/glew.h>
+#include <algorithm>
+#include <array>
+#include <glimac/Image.hpp>
+#include <glimac/Program.hpp>
+#include <glimac/SDLWindowManager.hpp>
+#include <glimac/Sphere.hpp>
+#include <glimac/FreeflyCamera.hpp>
+#include <iostream>
+#include <memory>
+#include <tuple>
+
+using namespace glimac;
 
 enum VertexAttribute : GLuint {
   VERTEX_ATTR_POSITION   = 0,  // Position attribute
@@ -85,7 +98,8 @@ struct MoonProgram {
     GLIMAC_CHECK_GLINT(m_uTexture_ref      = glGetUniformLocation(m_program.getGLId(), "uTexture"));
   }
 
-  void use() {
+  void use()
+  {
     m_program.use();
     glUniform1i(m_uTexture_ref, 0); // Moon texture is binded to Texture Unit 0
   }
@@ -98,9 +112,19 @@ struct MoonProgram {
   }
 };
 
+static std::unique_ptr<Image> _loadImage(
+  const FilePath& filepath
+)
+{
+  std::unique_ptr<Image> image = loadImage(filepath);
+  if (nullptr == image) {
+    throw std::runtime_error("Unable to load image (from file " + std::string(filepath) + ")");
+  }
+  return image;
+}
 
-int main(int argc, char** argv) {
-
+int main(int argc, char** argv)
+{
   // Initialize SDL and open a window
   uint32_t window_width  = 800u;
   uint32_t window_height = 600u;
@@ -123,12 +147,18 @@ int main(int argc, char** argv) {
   /*********************************
    * HERE SHOULD COME THE INITIALIZATION CODE
    *********************************/
-
-  Visualizer visualizer;
   FilePath application_path(argv[0]);
 
   // Textures loading
-  visualizer.loadTextureImages(application_path);
+  std::unique_ptr<Image> earth_map_img = _loadImage(
+    application_path.dirPath() + "../../assets/textures/EarthMap.jpg"
+  );
+  std::unique_ptr<Image> cloud_map_img = _loadImage(
+    application_path.dirPath() + "../../assets/textures/CloudMap.jpg"
+  );
+  std::unique_ptr<Image> moon_map_img  = _loadImage(
+    application_path.dirPath() + "../../assets/textures/MoonMap.jpg"
+  );
 
   // Shaders loading, compilation and uniforms location
   EarthProgram earth_program(application_path);
@@ -188,33 +218,33 @@ int main(int argc, char** argv) {
   glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind VBO
   glBindVertexArray(0); // Unbind VAO
 
-  // // Textures specification
-  // const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...
-  // const GLenum mag_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR
+  // Textures specification
+  const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...
+  const GLenum mag_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR
 
-  // GLuint textures_vtex[NB_TEXTURES];
-  // glGenTextures(NB_TEXTURES, textures_vtex);
+  GLuint textures_vtex[NB_TEXTURES];
+  glGenTextures(NB_TEXTURES, textures_vtex);
 
-  // glActiveTexture(GL_TEXTURE0);
-  // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_EARTH_MAP]); // Bind texture object
-  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, earth_map_img->getWidth(), earth_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, earth_map_img->getPixels()); // Load texture image
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  // glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_EARTH_MAP]); // Bind texture object
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, earth_map_img->getWidth(), earth_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, earth_map_img->getPixels()); // Load texture image
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
+  glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
 
-  // glActiveTexture(GL_TEXTURE1);
-  // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_CLOUD_MAP]); // Bind texture object
-  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cloud_map_img->getWidth(), cloud_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, cloud_map_img->getPixels()); // Load texture image
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  // glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
+  glActiveTexture(GL_TEXTURE1);
+  glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_CLOUD_MAP]); // Bind texture object
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cloud_map_img->getWidth(), cloud_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, cloud_map_img->getPixels()); // Load texture image
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
+  glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
 
-  // glActiveTexture(GL_TEXTURE0);
-  // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_MOON_MAP]); // Bind texture object
-  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, moon_map_img->getWidth(), moon_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, moon_map_img->getPixels()); // Load texture image
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  // glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_MOON_MAP]); // Bind texture object
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, moon_map_img->getWidth(), moon_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, moon_map_img->getPixels()); // Load texture image
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
+  glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
 
   // Application loop:
   const float pan_motio_speed = 1.f;
@@ -282,10 +312,10 @@ int main(int argc, char** argv) {
     earth_program.setMatrices(glm::rotate(global_MVMatrix, time, glm::vec3(0, 1, 0)), ProjMatrix);
 
     // Set earth textures
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_EARTH_MAP]); // Bind earth texture in TU 0
-    // glActiveTexture(GL_TEXTURE1);
-    // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_CLOUD_MAP]); // Bind cloud texture in TU 1
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_EARTH_MAP]); // Bind earth texture in TU 0
+    glActiveTexture(GL_TEXTURE1);
+    glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_CLOUD_MAP]); // Bind cloud texture in TU 1
 
     // Draw earth vertices
     glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
@@ -296,8 +326,8 @@ int main(int argc, char** argv) {
     moon_program.use();
 
     // Set moon texture
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_MOON_MAP]); // Bind moon texture in TU 0
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_MOON_MAP]); // Bind moon texture in TU 0
 
     for (const std::tuple<glm::vec3,glm::vec3,float>& angle_offset: moon_prop) {
       const glm::vec3& init_angle = std::get<0>(angle_offset);
@@ -321,7 +351,7 @@ int main(int argc, char** argv) {
     windowManager.swapBuffers();
   }
 
-  // glDeleteTextures(NB_TEXTURES, textures_vtex); // Release texture
+  glDeleteTextures(NB_TEXTURES, textures_vtex); // Release texture
 
   std::cout << "Closing application" << std::endl;
   return EXIT_SUCCESS;
