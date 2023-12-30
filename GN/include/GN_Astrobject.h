@@ -39,6 +39,8 @@ public:
 
 	~GN_Astrobject() {};
 
+	void loadShaders()
+
 	/** Initializes */
 	void init();
 
@@ -58,9 +60,9 @@ private:
 	FilePath        _texturePath;
 
 	// rendering
-	const Sphere;
-	const *ShapeVertex;
-	const GLsizei;
+	const Sphere       _body;
+	const *ShapeVertex _vertices;
+	const GLsizei      _nbVertices;
 
 };
 

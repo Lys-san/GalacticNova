@@ -116,7 +116,6 @@ static std::unique_ptr<Image> _loadImage(
 }
 
 int main(int argc, char** argv) {
-
   Visualizer visualizer;
   auto windowManager = visualizer.openWindow();
 
