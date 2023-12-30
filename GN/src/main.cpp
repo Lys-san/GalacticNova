@@ -1,18 +1,10 @@
 #define GLIMAC_GL_CHECK_WARNING
 
-#include <GL/glew.h>
-#include <algorithm>
-#include <array>
-#include <glimac/Image.hpp>
-#include <glimac/Program.hpp>
-#include <glimac/SDLWindowManager.hpp>
-#include <glimac/Sphere.hpp>
-#include <glimac/FreeflyCamera.hpp>
-#include <iostream>
-#include <memory>
-#include <tuple>
+#include "visualizer.h"
 
 using namespace glimac;
+
+
 
 enum VertexAttribute : GLuint {
   VERTEX_ATTR_POSITION   = 0,  // Position attribute
@@ -123,46 +115,40 @@ static std::unique_ptr<Image> _loadImage(
   return image;
 }
 
-int main(int argc, char** argv)
-{
-  // Initialize SDL and open a window
-  uint32_t window_width  = 800u;
-  uint32_t window_height = 600u;
-  SDLWindowManager windowManager(window_width, window_height, "GLImac");
+int main(int argc, char** argv) {
 
-  float window_ar = (float) window_width / window_height;
+  Visualizer visualizer;
+  auto windowManager = visualizer.openWindow();
 
-  // Initialize glew for OpenGL3+ support
-  GLenum glewInitError = glewInit();
-  if(GLEW_OK != glewInitError) {
-    std::cerr << "Error at GLEW loading: "
-              << glewGetErrorString(glewInitError)
-              << std::endl;
+  uint window_width = visualizer.width();
+  uint window_height = visualizer.height();
+  float window_ar = (float) visualizer.width() / visualizer.height();
+
+  if (!Visualizer::initGlew()) {
     return EXIT_FAILURE;
   }
-
-  std::cout << "OpenGL Version : " << glGetString(GL_VERSION) << std::endl;
-  std::cout << "GLEW Version : " << glewGetString(GLEW_VERSION) << std::endl;
 
   /*********************************
    * HERE SHOULD COME THE INITIALIZATION CODE
    *********************************/
-  FilePath application_path(argv[0]);
+  FilePath applicationPath(argv[0]);
 
   // Textures loading
   std::unique_ptr<Image> earth_map_img = _loadImage(
-    application_path.dirPath() + "../../assets/textures/EarthMap.jpg"
+    applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg"
   );
   std::unique_ptr<Image> cloud_map_img = _loadImage(
-    application_path.dirPath() + "../../assets/textures/CloudMap.jpg"
+    applicationPath.dirPath() + "../../assets/textures/CloudMap.jpg"
   );
   std::unique_ptr<Image> moon_map_img  = _loadImage(
-    application_path.dirPath() + "../../assets/textures/MoonMap.jpg"
+    applicationPath.dirPath() + "../../assets/textures/MoonMap.jpg"
   );
 
   // Shaders loading, compilation and uniforms location
-  EarthProgram earth_program(application_path);
-  MoonProgram moon_program(application_path);
+  Program program = Visualizer::initProgram(applicationPath);
+
+  EarthProgram earth_program(applicationPath);
+  MoonProgram moon_program(applicationPath);
 
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test
