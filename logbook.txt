@@ -8,4 +8,4 @@ Abandoned the idea of using inheritance because the Sun will be the only "differ
 
 [01.04.2024]
 
-Happy new year ! I wish could've started this project sooner. 
+Happy new year ! (I wish could've started this project sooner). Anyway, the GN_Astrobjects are finally initialized and they will soon be able to be used for rendering. I just need to deal with textures for next time. The visualizer class may need some cleanup but that's only minor priority.

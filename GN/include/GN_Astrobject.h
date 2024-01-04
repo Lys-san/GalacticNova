@@ -35,7 +35,7 @@ public:
 		FilePath texturePath
 		) :
 	_program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
-                              applicationPath.dirPath() + "shaders/multiTex3D.fs.glsl")),
+                              applicationPath.dirPath() + "shaders/tex3D.fs.glsl")),
 	_radius (radius),
 	_barycenter(barycenter),
 	_aphelion(aphelion),
@@ -44,16 +44,26 @@ public:
 	_lengthOfDays(lengthOfDays),
 	_orbitalInclination(orbitalInclination),
 	_mapImage(loadImage(texturePath)) {
-		std::cout << "here" << std::endl;
+		// load matrix refs
 	    GLIMAC_CHECK_GLINT(_uMVPMatrixRef    = glGetUniformLocation(_program.getGLId(), "uMVPMatrix"));
 		GLIMAC_CHECK_GLINT(_uMVMatrixRef     = glGetUniformLocation(_program.getGLId(), "uMVMatrix")); // Unused
 		GLIMAC_CHECK_GLINT(_uNormalMatrixRef = glGetUniformLocation(_program.getGLId(), "uNormalMatrix")); // Unused
 		GLIMAC_CHECK_GLINT(_uTextureRef      = glGetUniformLocation(_program.getGLId(), "uTexture"));
+
+		glActiveTexture(GL_TEXTURE0);
+
+		// init spheres
 	}
 
 	~GN_Astrobject() {};
 
+	// render object
+	void render();
 
+	void setMatrices(const glm::mat4& moon_MVMatrix, const glm::mat4& ProjMatrix);
+
+	void bindtexture();
+	void activeTexture();
 
 	void loadShaders();
 
@@ -82,14 +92,16 @@ private:
 	std::unique_ptr<Image> _mapImage;
 
 	// rendering
-	// const Sphere       _body;
-	// const ShapeVertex _vertices;
-	// const GLsizei      _nbVertices;
+	// Sphere       _body;
+	// ShapeVertex _vertices;
+	// GLsizei      _nbVertices;
 
 	GLint _uMVPMatrixRef;
 	GLint _uMVMatrixRef;
 	GLint _uNormalMatrixRef;
 	GLint _uTextureRef;
+
+	const uint textureIndex;
 
 };
 

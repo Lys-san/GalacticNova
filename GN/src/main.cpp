@@ -143,7 +143,7 @@ int main(int argc, char** argv) {
     applicationPath.dirPath() + "../../assets/textures/CloudMap.jpg"
   );
   std::unique_ptr<Image> moon_map_img  = _loadImage(
-    applicationPath.dirPath() + "../../assets/textures/MoonMap.jpg"
+    applicationPath.dirPath() + "../../assets/textures/SunMap.jpg"
   );
 
   // Shaders loading, compilation and uniforms location
@@ -179,15 +179,15 @@ int main(int argc, char** argv) {
   const GLsizei sphere_nb_vertices   = sphere.getVertexCount();
 
   // Moons
-  const uint nb_moons = 32u;
-  std::array<std::tuple<glm::vec3,glm::vec3,float>, nb_moons> moon_prop;
-  std::generate(
-    moon_prop.begin(), moon_prop.end(),
-    [sphere_radius]() {
-      float offset = glm::linearRand(0.f, 360.f);
-      return std::make_tuple(glm::sphericalRand(1.f), glm::sphericalRand(sphere_radius), offset);
-    }
-  );
+  // const uint nb_moons = 32u;
+  // std::array<std::tuple<glm::vec3,glm::vec3,float>, nb_moons> moon_prop;
+  // std::generate(
+  //   moon_prop.begin(), moon_prop.end(),
+  //   [sphere_radius]() {
+  //     float offset = glm::linearRand(0.f, 360.f);
+  //     return std::make_tuple(glm::sphericalRand(1.f), glm::sphericalRand(sphere_radius), offset);
+  //   }
+  // );
 
   // Vertex specification
   GLuint vbo;
@@ -310,8 +310,11 @@ int main(int argc, char** argv) {
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
 
     // Enable eath program and set transformation matrices
-    earth_program.use();
-    earth_program.setMatrices(glm::rotate(global_MVMatrix, time, glm::vec3(0, 1, 0)), ProjMatrix);
+    sun.render();
+    sun.setMatrices(glm::rotate(global_MVMatrix, time, glm::vec3(0, 1, 0)), ProjMatrix);
+
+    // earth_program.use();
+    // earth_program.setMatrices(glm::rotate(global_MVMatrix, time, glm::vec3(0, 1, 0)), ProjMatrix);
 
     // Set earth textures
     glActiveTexture(GL_TEXTURE0);
@@ -325,26 +328,26 @@ int main(int argc, char** argv) {
     glBindTexture(GL_TEXTURE_2D, 0); // Unbind cloud texture from TU 1
 
     // Draw moons
-    moon_program.use();
+    // moon_program.use();
 
     // Set moon texture
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_MOON_MAP]); // Bind moon texture in TU 0
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, textures_vtex[TEX_MOON_MAP]); // Bind moon texture in TU 0
 
-    for (const std::tuple<glm::vec3,glm::vec3,float>& angle_offset: moon_prop) {
-      const glm::vec3& init_angle = std::get<0>(angle_offset);
-      const glm::vec3& rot_angle  = std::get<1>(angle_offset);
-      const float offset          = std::get<2>(angle_offset);
+    // for (const std::tuple<glm::vec3,glm::vec3,float>& angle_offset: moon_prop) {
+    //   const glm::vec3& init_angle = std::get<0>(angle_offset);
+    //   const glm::vec3& rot_angle  = std::get<1>(angle_offset);
+    //   const float offset          = std::get<2>(angle_offset);
 
-      glm::mat4 moon_MVMatrix = global_MVMatrix;
-      moon_MVMatrix = glm::rotate   (moon_MVMatrix, offset, init_angle);
-      moon_MVMatrix = glm::rotate   (moon_MVMatrix,   time,  rot_angle);
-      moon_MVMatrix = glm::translate(moon_MVMatrix, glm::vec3(-2, 0, 0));
-      moon_MVMatrix = glm::scale    (moon_MVMatrix, glm::vec3(0.2, 0.2, 0.2));
-      moon_program.setMatrices(moon_MVMatrix, ProjMatrix);
+    //   glm::mat4 moon_MVMatrix = global_MVMatrix;
+    //   moon_MVMatrix = glm::rotate   (moon_MVMatrix, offset, init_angle);
+    //   moon_MVMatrix = glm::rotate   (moon_MVMatrix,   time,  rot_angle);
+    //   moon_MVMatrix = glm::translate(moon_MVMatrix, glm::vec3(-2, 0, 0));
+    //   moon_MVMatrix = glm::scale    (moon_MVMatrix, glm::vec3(0.2, 0.2, 0.2));
+    //   moon_program.setMatrices(moon_MVMatrix, ProjMatrix);
 
-      glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
-    }
+    //   glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
+    // }
 
     glBindTexture(GL_TEXTURE_2D, 0); // Unbind moon texture from TU 0
     glBindVertexArray(0); // Unbind vao (from active VAO)
