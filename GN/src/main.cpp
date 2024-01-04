@@ -1,6 +1,7 @@
 #define GLIMAC_GL_CHECK_WARNING
 
 #include "visualizer.h"
+#include "GN_Astrobject.h"
 
 using namespace glimac;
 
@@ -127,6 +128,8 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
+
+
   /*********************************
    * HERE SHOULD COME THE INITIALIZATION CODE
    *********************************/
@@ -144,10 +147,24 @@ int main(int argc, char** argv) {
   );
 
   // Shaders loading, compilation and uniforms location
-  Program program = Visualizer::initProgram(applicationPath);
+  // Program program = Visualizer::initProgram(applicationPath);
+
+  GN_Astrobject sun(applicationPath,
+                    "Sun",
+                    1.f,
+                    GN_Point(0.f, 0.f, 0.f),
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg"
+                    );
 
   EarthProgram earth_program(applicationPath);
   MoonProgram moon_program(applicationPath);
+
+
 
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test

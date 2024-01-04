@@ -2,3 +2,10 @@
 
 Started coding the whole project : the CMakelists shouldn't be more of a problem in the future. The main program is for now one the of the TP, it will be adjusted after the different classes are created. Two of them are in construction : the Visualiser one and the GN_Astrobject. The Visualizer class will overall contain static functions for initialization and automatic buffer gestion etc. and teh GN_Astrobject will represent either a planet, a sun of a moon. I need to implement inheritance with new subclasses (one for each type) for next time. 
 
+[12.30.2023]
+
+Abandoned the idea of using inheritance because the Sun will be the only "different" object, it will just needs to have some attributes sets to 0 to work. The main file is starting working with the visualizer, but it's just the beginning of big upcoming changes.
+
+[01.04.2024]
+
+Happy new year ! I wish could've started this project sooner. 

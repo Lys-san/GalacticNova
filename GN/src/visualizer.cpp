@@ -51,12 +51,4 @@ uint Visualizer::height() const {
 
 ////////////////////////////////////////////////////////////////////////////////
 
-std::unique_ptr<Image> Visualizer::loadImage(const FilePath &filepath) {
-	std::unique_ptr<Image> image = loadImage(filepath);
 
-	if (nullptr == image) {
-		throw std::runtime_error("Unable to load image from file " + std::string(filepath));
-	}
-
-	return image;
-}

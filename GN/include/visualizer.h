@@ -1,7 +1,7 @@
 /**
  * Author        : Lysandre M. (lysandre.macke@edu.univ-eiffel.fr)
  * Created       : 12-29-2023
- * Last modified : 12-29-2023 */
+ * Last modified : 01-04-2023 */
 
 #ifndef VISU_H
 #define VISU_H
@@ -53,7 +53,6 @@ public:
 	uint height() const;
 
 private:
-	static std::unique_ptr<Image> loadImage(const FilePath &filepath);
 
 	// private attributes
 	const std::string _name;
