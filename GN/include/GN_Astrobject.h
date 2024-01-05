@@ -32,7 +32,8 @@ public:
 		double orbitalPeriod,
 		double lengthOfDays,
 		double orbitalInclination,
-		FilePath texturePath
+		FilePath texturePath,
+		GLuint textureIndex
 		) :
 	_program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
                               applicationPath.dirPath() + "shaders/tex3D.fs.glsl")),
@@ -43,7 +44,8 @@ public:
 	_orbitalPeriod(orbitalPeriod),
 	_lengthOfDays(lengthOfDays),
 	_orbitalInclination(orbitalInclination),
-	_mapImage(loadImage(texturePath)) {
+	_mapImage(loadImage(texturePath)),
+	_textureIndex(textureIndex) {
 		// load matrix refs
 	    GLIMAC_CHECK_GLINT(_uMVPMatrixRef    = glGetUniformLocation(_program.getGLId(), "uMVPMatrix"));
 		GLIMAC_CHECK_GLINT(_uMVMatrixRef     = glGetUniformLocation(_program.getGLId(), "uMVMatrix")); // Unused
@@ -62,7 +64,9 @@ public:
 
 	void setMatrices(const glm::mat4& moon_MVMatrix, const glm::mat4& ProjMatrix);
 
-	void bindtexture();
+	/** Bind to textures array at astrobject's texture index*/
+	void bindTexture(GLuint *textures);
+
 	void activeTexture();
 
 	void loadShaders();
@@ -72,6 +76,8 @@ public:
 
 	/** Accessor for private attribute _texturePath. */
 	std::unique_ptr<Image> mapImage() const;
+
+	GLuint textureIndex() const;
 
 
 private:
@@ -101,7 +107,7 @@ private:
 	GLint _uNormalMatrixRef;
 	GLint _uTextureRef;
 
-	const uint textureIndex;
+	const GLuint _textureIndex;
 
 };
 
