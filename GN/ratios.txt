@@ -1,0 +1,12 @@
+
+Diameter 
+
+Sun     1 400 000  10.f            divide by 140 000
+Mercure     4 879  
+Venus      12 104
+Earth      12 756  0.091f  
+
+
+
+
+152.1    -> 10864.28571f

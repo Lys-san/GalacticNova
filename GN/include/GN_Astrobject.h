@@ -25,15 +25,15 @@ public:
 
 	GN_Astrobject(const FilePath& applicationPath,
 		std::string name,
-		GLfloat radius,
-		GN_Point barycenter,
-		uint aphelion, 
-		uint perihelion,
-		double orbitalPeriod,
-		double lengthOfDays,
-		double orbitalInclination,
-		FilePath texturePath,
-		GLuint textureIndex
+		GLfloat     radius,
+		GN_Point    barycenter,
+		GN_Point    aphelion, 
+		GN_Point    perihelion,
+		double      orbitalPeriod,
+		double      lengthOfDays,
+		double      orbitalInclination,
+		FilePath    texturePath,
+		GLuint      textureIndex
 		) :
 	_program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
                               applicationPath.dirPath() + "shaders/tex3D.fs.glsl")),
@@ -59,13 +59,19 @@ public:
 
 	~GN_Astrobject() {};
 
-	// render object
+	/** render object (use associated program) */
 	void render();
 
 	void setMatrices(const glm::mat4& moon_MVMatrix, const glm::mat4& ProjMatrix);
 
-	/** Bind to textures array at astrobject's texture index*/
+	/** Bind to textures array at astrobject's texture index */
 	void bindTexture(GLuint *textures);
+
+	/** Get current Astrobject coordinate (center of sphere) */
+	GN_Point getCurrentCoordinates();
+
+	/** updates MVMatrix */
+	void updatePosition();
 
 	void activeTexture();
 

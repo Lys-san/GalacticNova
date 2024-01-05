@@ -128,44 +128,40 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-
-
   /*********************************
    * HERE SHOULD COME THE INITIALIZATION CODE
    *********************************/
   FilePath applicationPath(argv[0]);
 
-  // Textures loading
-  // std::unique_ptr<Image> earth_map_img = _loadImage(
-  //   applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg"
-  // );
-  // std::unique_ptr<Image> cloud_map_img = _loadImage(
-  //   applicationPath.dirPath() + "../../assets/textures/CloudMap.jpg"
-  // );
-  // std::unique_ptr<Image> moon_map_img  = _loadImage(
-  //   applicationPath.dirPath() + "../../assets/textures/SunMap.jpg"
-  // );
-
   // Shaders loading, compilation and uniforms location
   // Program program = Visualizer::initProgram(applicationPath);
 
+  // create our astrobjects
   GN_Astrobject sun(applicationPath,
                     "Sun",
-                    1.f,
+                    5.f,
+                    GN_Point(0.f, 0.f, 0.f),
+                    GN_Point(0.f, 0.f, 0.f),
                     GN_Point(0.f, 0.f, 0.f),
                     0,
                     0,
                     0,
-                    0,
-                    0,
                     applicationPath.dirPath() + "../../assets/textures/SunMap.jpg",
-                    1
+                    0
                     );
 
-  // EarthProgram earth_program(applicationPath);
-  // MoonProgram moon_program(applicationPath);
-
-
+    GN_Astrobject earth(applicationPath,
+                    "Earth",
+                    0.0455f,
+                    GN_Point(0.f, 0.f, 0.f),
+                    GN_Point(10864.28571f, 0.f, 0.f),
+                    GN_Point(10864.28571f, 0.f, 0.f),
+                    365.2,
+                    0,
+                    0,
+                    applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg",
+                    1
+                    );
 
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test
@@ -221,34 +217,13 @@ int main(int argc, char** argv) {
   glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind VBO
   glBindVertexArray(0); // Unbind VAO
 
-  // Textures specification
-  // const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...
-  // const GLenum mag_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR
 
+  // texture specification
   GLuint textures[NB_TEXTURES];
+  glGenTextures(NB_TEXTURES, textures);
+
   sun.bindTexture(textures);
-  // glGenTextures(NB_TEXTURES, textures);
-
-  // glActiveTexture(GL_TEXTURE0);
-  // glBindTexture(GL_TEXTURE_2D, textures[TEX_EARTH_MAP]); // Bind texture object
-  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, earth_map_img->getWidth(), earth_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, earth_map_img->getPixels()); // Load texture image
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  // glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
-
-  // glActiveTexture(GL_TEXTURE1);
-  // glBindTexture(GL_TEXTURE_2D, textures[TEX_CLOUD_MAP]); // Bind texture object
-  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, cloud_map_img->getWidth(), cloud_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, cloud_map_img->getPixels()); // Load texture image
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  // glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
-
-  // glActiveTexture(GL_TEXTURE0);
-  // glBindTexture(GL_TEXTURE_2D, textures[TEX_MOON_MAP]); // Bind texture object
-  // glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, moon_map_img->getWidth(), moon_map_img->getHeight(), 0, GL_RGBA, GL_FLOAT, moon_map_img->getPixels()); // Load texture image
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
-  // glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
-  // glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
+  earth.bindTexture(textures);
 
   // Application loop:
   const float pan_motio_speed = 1.f;
@@ -329,6 +304,12 @@ int main(int argc, char** argv) {
 
     glBindTexture(GL_TEXTURE_2D, 0); // Unbind cloud texture from TU 1
 
+    // earth.render();
+
+    // glActiveTexture(GL_TEXTURE0);
+    // glBindTexture(GL_TEXTURE_2D, textures[earth.textureIndex()]); // Bind earth texture in TU 0
+
+    // earth.setMatrices()
     // Draw moons
     // moon_program.use();
 
