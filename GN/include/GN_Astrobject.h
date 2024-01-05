@@ -20,6 +20,8 @@
 
 using namespace glimac;
 
+const GLfloat SUN_RADIUS = 1400000.f;
+
 class GN_Astrobject {
 public:
 
@@ -27,8 +29,8 @@ public:
 		std::string name,
 		GLfloat     radius,
 		GN_Point    barycenter,
-		GN_Point    aphelion, 
-		GN_Point    perihelion,
+		GLfloat     aphelion, 
+		GLfloat     perihelion,
 		double      orbitalPeriod,
 		double      lengthOfDays,
 		double      orbitalInclination,
@@ -62,7 +64,7 @@ public:
 	/** render object (use associated program) */
 	void render();
 
-	void setMatrices(const glm::mat4& moon_MVMatrix, const glm::mat4& ProjMatrix);
+	void setMatrices(const glm::mat4& MVMatrix, const glm::mat4& ProjMatrix);
 
 	/** Bind to textures array at astrobject's texture index */
 	void bindTexture(GLuint *textures);
@@ -71,7 +73,7 @@ public:
 	GN_Point getCurrentCoordinates();
 
 	/** updates MVMatrix */
-	void updatePosition();
+	void updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time);
 
 	void activeTexture();
 
@@ -87,7 +89,7 @@ public:
 
 
 private:
-		static std::unique_ptr<Image> _loadImage(const FilePath &filepath);
+	static std::unique_ptr<Image> _loadImage(const FilePath &filepath);
 
 	
 
@@ -96,8 +98,8 @@ private:
 	Program                _program;
 	GLfloat                _radius;
 	GN_Point               _barycenter;
-	uint                   _aphelion;
-	uint                   _perihelion;
+	GLfloat                _aphelion;
+	GLfloat                _perihelion;
 	double                 _orbitalPeriod;
 	double                 _lengthOfDays;
 	double                 _orbitalInclination;

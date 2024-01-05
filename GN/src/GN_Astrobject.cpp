@@ -11,6 +11,23 @@ void GN_Astrobject::setMatrices(const glm::mat4& MVMatrix, const glm::mat4& Proj
 	glUniformMatrix4fv(_uNormalMatrixRef, 1u, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
 }
 
+void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time) {
+	glm::mat4 MVMatrix = globalMVMatrix;
+
+	const float ratio = 10* _radius/SUN_RADIUS;
+
+	// rotation
+	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
+	// translation
+	MVMatrix = glm::translate(MVMatrix, glm::vec3(-ratio*_aphelion, 0, 0));
+	// scale
+	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
+
+	setMatrices(MVMatrix, ProjMatrix);
+	//setMatrices(MVMatrix, ProjMatrix);
+
+}
+
 void GN_Astrobject::bindTexture(GLuint *textures) {
 	// Textures specification
 	const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...

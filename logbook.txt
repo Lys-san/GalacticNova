@@ -1,6 +1,6 @@
 [12.29.2023]
 
-Started coding the whole project : the CMakelists shouldn't be more of a problem in the future. The main program is for now one the of the TP, it will be adjusted after the different classes are created. Two of them are in construction : the Visualiser one and the GN_Astrobject. The Visualizer class will overall contain static functions for initialization and automatic buffer gestion etc. and teh GN_Astrobject will represent either a planet, a sun of a moon. I need to implement inheritance with new subclasses (one for each type) for next time. 
+Started coding the whole project : the CMakelists shouldn't be more of a problem in the future. The main program is for now one the of the TP, it will be adjusted after the different classes are created. Two of them are in construction : the Visualiser one and the GN_Astrobject. The Visualizer class will overall contain static functions for initialization and automatic buffer gestion etc. and the GN_Astrobject will represent a planet, a sun or a moon. I need to implement inheritance with new subclasses (one for each type) for next time. 
 
 [12.30.2023]
 
@@ -9,3 +9,7 @@ Abandoned the idea of using inheritance because the Sun will be the only "differ
 [01.04.2024]
 
 Happy new year ! (I wish could've started this project sooner). Anyway, the GN_Astrobjects are finally initialized and they will soon be able to be used for rendering. I just need to deal with textures for next time. The visualizer class may need some cleanup but that's only minor priority.
+
+[01.05.2024]
+
+What a productive day today ! Finally fixed texture stuff and the Astrobjects are done for the basic part (sphere display, texture, movement). A minimal and approximative solar system should be done by tomorrow.

@@ -139,10 +139,10 @@ int main(int argc, char** argv) {
   // create our astrobjects
   GN_Astrobject sun(applicationPath,
                     "Sun",
-                    5.f,
+                    1400000.f,
                     GN_Point(0.f, 0.f, 0.f),
-                    GN_Point(0.f, 0.f, 0.f),
-                    GN_Point(0.f, 0.f, 0.f),
+                    0.f,
+                    0.f,
                     0,
                     0,
                     0,
@@ -152,10 +152,10 @@ int main(int argc, char** argv) {
 
     GN_Astrobject earth(applicationPath,
                     "Earth",
-                    0.0455f,
+                    12756.f,
                     GN_Point(0.f, 0.f, 0.f),
-                    GN_Point(10864.28571f, 0.f, 0.f),
-                    GN_Point(10864.28571f, 0.f, 0.f),
+                    15.f,
+                    17.f,
                     365.2,
                     0,
                     0,
@@ -283,54 +283,32 @@ int main(int argc, char** argv) {
     float time = windowManager.getTime();
 
     // Compute global matrices
-    // glm::mat4 global_MVMatrix = glm::translate(glm::mat4(1.f), glm::vec3(0.f, 0.f, -5.f));
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
 
-    // Enable eath program and set transformation matrices
+    // === SUN ===
     sun.render();
-    sun.setMatrices(glm::rotate(global_MVMatrix, time, glm::vec3(0, 1, 0)), ProjMatrix);
+    sun.updatePosition(global_MVMatrix, ProjMatrix, time);
 
-    // earth_program.use();
-    // earth_program.setMatrices(glm::rotate(global_MVMatrix, time, glm::vec3(0, 1, 0)), ProjMatrix);
-
-    // Set earth textures
+    // Set sun textures
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, textures[sun.textureIndex()]); // Bind earth texture in TU 0
-    // glActiveTexture(GL_TEXTURE1);
-    // glBindTexture(GL_TEXTURE_2D, textures[TEX_CLOUD_MAP]); // Bind cloud texture in TU 1
 
-    // Draw earth vertices
+    // Draw sun vertices
     glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
 
-    glBindTexture(GL_TEXTURE_2D, 0); // Unbind cloud texture from TU 1
 
-    // earth.render();
+    glBindTexture(GL_TEXTURE_2D, 0); // Unbind sun texture from TU 0
 
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, textures[earth.textureIndex()]); // Bind earth texture in TU 0
+    // === EARTH === 
+    earth.render();
+    earth.updatePosition(global_MVMatrix, ProjMatrix, time);
 
-    // earth.setMatrices()
-    // Draw moons
-    // moon_program.use();
+    // set texture
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textures[earth.textureIndex()]); // Bind earth texture in TU 0
 
-    // Set moon texture
-    // glActiveTexture(GL_TEXTURE0);
-    // glBindTexture(GL_TEXTURE_2D, textures[TEX_MOON_MAP]); // Bind moon texture in TU 0
-
-    // for (const std::tuple<glm::vec3,glm::vec3,float>& angle_offset: moon_prop) {
-    //   const glm::vec3& init_angle = std::get<0>(angle_offset);
-    //   const glm::vec3& rot_angle  = std::get<1>(angle_offset);
-    //   const float offset          = std::get<2>(angle_offset);
-
-    //   glm::mat4 moon_MVMatrix = global_MVMatrix;
-    //   moon_MVMatrix = glm::rotate   (moon_MVMatrix, offset, init_angle);
-    //   moon_MVMatrix = glm::rotate   (moon_MVMatrix,   time,  rot_angle);
-    //   moon_MVMatrix = glm::translate(moon_MVMatrix, glm::vec3(-2, 0, 0));
-    //   moon_MVMatrix = glm::scale    (moon_MVMatrix, glm::vec3(0.2, 0.2, 0.2));
-    //   moon_program.setMatrices(moon_MVMatrix, ProjMatrix);
-
-    //   glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
-    // }
+    // draw
+    glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
 
     glBindTexture(GL_TEXTURE_2D, 0); // Unbind moon texture from TU 0
     glBindVertexArray(0); // Unbind vao (from active VAO)
