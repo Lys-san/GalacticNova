@@ -11,24 +11,26 @@ void GN_Astrobject::setMatrices(const glm::mat4& MVMatrix, const glm::mat4& Proj
 	glUniformMatrix4fv(_uNormalMatrixRef, 1u, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
 }
 
-void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time) {
+void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, int deplacement) {
 	glm::mat4 MVMatrix = globalMVMatrix;
 
 	const float ratio = _radius/SUN_RADIUS;
 
-	// rotation
+	// rotation around the sun
 	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
 	// translation
-	MVMatrix = glm::translate(MVMatrix, glm::vec3(-ratio*_aphelion, 0, 0));
+	MVMatrix = glm::translate(MVMatrix, glm::vec3(deplacement, 0, 0)); //-ratio*_aphelion
 	// scale
 	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
+	// self rotation
+	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
 
 	setMatrices(MVMatrix, ProjMatrix);
 }
 
-void GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices) {
+void GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement) {
     render();
-    updatePosition(globalMVMatrix, ProjMatrix, time);
+    updatePosition(globalMVMatrix, ProjMatrix, time, deplacement);
 
     // Set textures
     glActiveTexture(GL_TEXTURE0);

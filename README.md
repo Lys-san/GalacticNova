@@ -11,7 +11,7 @@ Coded in c++ using the OpenGL library, this projects was made for my Image Synth
 
 To compile GN it is mendatory to have those libraries installed on your computer :
 
-- cmake min. 3.26
+- cmake min. 3.22
 - OpenGL
 - SDL
 - GLEW

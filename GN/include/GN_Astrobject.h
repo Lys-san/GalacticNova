@@ -20,7 +20,7 @@
 
 using namespace glimac;
 
-const GLfloat SUN_RADIUS = 1400000.f;
+const GLfloat SUN_RADIUS = 70000.f;
 
 class GN_Astrobject {
 public:
@@ -72,10 +72,10 @@ public:
 	/** Get current Astrobject coordinate (center of sphere) */
 	GN_Point getCurrentCoordinates();
 
-	void display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices);
+	void display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement);
 
 	/** updates MVMatrix */
-	void updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time);
+	void updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, int deplacement);
 
 	void activeTexture();
 

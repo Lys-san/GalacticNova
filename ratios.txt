@@ -10,3 +10,17 @@ Earth      12 756  0.091f
 
 
 152.1    -> 10864.28571f
+
+----
+Ratio du diamètre des planètes par rapport au soleil:
+Nom            Vrai diamètre       Ratio
+Soleil:          1 400 000      --> 10
+Mercure:             4 879      --> 0.035
+Venus:              12 104      --> 0.086
+Terre:              12 756      --> 0.091
+Mars:                6 792      --> 0.049
+Jupiter:           142 984      --> 1.021
+Saturne:           120 536      --> 0.861
+Uranus:             51 118      --> 0.365
+Neptune:            49 528      --> 0.354
+Pluton:              2 376      --> 0.017

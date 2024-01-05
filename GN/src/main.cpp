@@ -60,7 +60,7 @@ int main(int argc, char** argv) {
                 0,
                 0,
                 applicationPath.dirPath() + "../../assets/textures/MercuryMap.jpg",
-                2
+                1
                 );
 
     GN_Astrobject venus(applicationPath,
@@ -73,7 +73,7 @@ int main(int argc, char** argv) {
             0,
             0,
             applicationPath.dirPath() + "../../assets/textures/VenusMap.jpg",
-            3
+            2
             );
 
     GN_Astrobject earth(applicationPath,
@@ -86,7 +86,7 @@ int main(int argc, char** argv) {
                     0,
                     0,
                     applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg",
-                    1
+                    3
                     );
 
     GN_Astrobject mars(applicationPath,
@@ -159,6 +159,20 @@ int main(int argc, char** argv) {
         8
         );
 
+    GN_Astrobject pluto(applicationPath,
+        "Pluto",
+        24764.f, // making bigger for better view
+        GN_Point(0.f, 0.f, 0.f),
+        //4558.9f,
+        450.f,
+        4471.1f,
+        59800.f,
+        0,
+        0,
+        applicationPath.dirPath() + "../../assets/textures/PlutoMap.jpg",
+        9
+        );
+
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test
   glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), window_ar, 0.1f, 100.f); 
@@ -215,6 +229,7 @@ int main(int argc, char** argv) {
   jupiter.bindTexture(textures);
   saturn.bindTexture(textures);
   neptune.bindTexture(textures);
+  pluto.bindTexture(textures);
 
   // Application loop:
   const float pan_motio_speed = 1.f;
@@ -277,32 +292,34 @@ int main(int argc, char** argv) {
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
 
     // === SUN ===
-    sun.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    sun.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, 0);
 
     // === Mercury ===
-    mercury.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    mercury.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -12);
 
     // === VENUS === 
-    mercury.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    venus.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -14);
 
     // === EARTH === 
-    earth.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    earth.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -16);
 
     // === MARS === 
-    mars.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    mars.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -18);
 
     // === Jupiter === 
-    mars.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    jupiter.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -20);
 
     // === Saturn === 
-    saturn.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    saturn.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -22);
 
     // === Uranus ===
-    uranus.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    uranus.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -24);
     
     // === Neptune ===
-    neptune.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    neptune.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -26);
     
+    // === Pluto ===
+    pluto.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -28);
 
     glBindVertexArray(0); // Unbind vao (from active VAO)
     // Update the display

@@ -45,7 +45,7 @@ public:
 private:
   const float PI = glm::pi<float>();
 
-  glm::vec3 m_Position = glm::vec3(0.f, 0.f, -5.f);  /**< Camera position */
+  glm::vec3 m_Position = glm::vec3(0.f, 0.f, -50.f);  /**< Camera position */
   float m_fPhi         = PI;   /**< Phi in radians */
   float m_fTheta       = 0.f;  /**< Theta in radians */
 
