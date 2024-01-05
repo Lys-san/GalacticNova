@@ -19,7 +19,7 @@ void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::m
 	// rotation
 	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
 	// translation
-	MVMatrix = glm::translate(MVMatrix, glm::vec3(-ratio*_aphelion/5, 0, 0));
+	MVMatrix = glm::translate(MVMatrix, glm::vec3(-ratio*_aphelion, 0, 0));
 	// scale
 	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
 

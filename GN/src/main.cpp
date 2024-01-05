@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
   // create our astrobjects
   GN_Astrobject sun(applicationPath,
                     "Sun",
-                    700000.f/2.f,
+                    700000.f,
                     GN_Point(0.f, 0.f, 0.f),
                     0.f,
                     0.f,
@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject mercury(applicationPath,
                 "Mercury",
-                10*2436.f, // making bigger for better view
+                2436.f, // making bigger for better view
                 GN_Point(0.f, 0.f, 0.f),
                 69.8f,
                 46.f,
@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject venus(applicationPath,
             "Venus",
-            10*6052.f, // making bigger for better view
+            6052.f, // making bigger for better view
             GN_Point(0.f, 0.f, 0.f),
             108.9f,
             107.5f,
@@ -78,7 +78,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject earth(applicationPath,
                     "Earth",
-                    10*6378.f, // making bigger for better view
+                    6378.f, // making bigger for better view
                     GN_Point(0.f, 0.f, 0.f),
                     152.1f,
                     147.1f,
@@ -91,7 +91,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject mars(applicationPath,
             "Mars",
-            10*3396.f, // making bigger for better view
+            3396.f, // making bigger for better view
             GN_Point(0.f, 0.f, 0.f),
             //249.3f,
             200.f,
@@ -105,7 +105,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject jupiter(applicationPath,
             "Jupiter",
-            10*71492.f, // making bigger for better view
+            71492.f, // making bigger for better view
             GN_Point(0.f, 0.f, 0.f),
             //816.4f,
             250.f,
@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject saturn(applicationPath,
             "Saturn",
-            10*60268.f, // making bigger for better view
+            60268.f, // making bigger for better view
             GN_Point(0.f, 0.f, 0.f),
             //1506.5f,
             300.f,
@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject uranus(applicationPath,
             "Uranus",
-            10*25559.f, // making bigger for better view
+            25559.f, // making bigger for better view
             GN_Point(0.f, 0.f, 0.f),
             //3001.4f,
             400.f,
@@ -147,7 +147,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject neptune(applicationPath,
         "Neptune",
-        10*24764.f, // making bigger for better view
+        24764.f, // making bigger for better view
         GN_Point(0.f, 0.f, 0.f),
         //4558.9f,
         450.f,
