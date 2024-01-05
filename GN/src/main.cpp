@@ -161,12 +161,12 @@ int main(int argc, char** argv) {
 
     GN_Astrobject pluto(applicationPath,
         "Pluto",
-        24764.f, // making bigger for better view
+        2376.f, // full diameter
         GN_Point(0.f, 0.f, 0.f),
-        //4558.9f,
-        450.f,
-        4471.1f,
-        59800.f,
+        //7375.9f,
+        550.f,
+        4436.8f,
+        90560.f,
         0,
         0,
         applicationPath.dirPath() + "../../assets/textures/PlutoMap.jpg",
@@ -228,6 +228,7 @@ int main(int argc, char** argv) {
   mars.bindTexture(textures);
   jupiter.bindTexture(textures);
   saturn.bindTexture(textures);
+  uranus.bindTexture(textures);
   neptune.bindTexture(textures);
   pluto.bindTexture(textures);
 
