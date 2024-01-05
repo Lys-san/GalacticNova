@@ -12,4 +12,4 @@ Happy new year ! (I wish could've started this project sooner). Anyway, the GN_A
 
 [01.05.2024]
 
-What a productive day today ! Finally fixed texture stuff and the Astrobjects are done for the basic part (sphere display, texture, movement). A minimal and approximative solar system should be done by tomorrow.
+What a productive day today ! Finally fixed texture stuff and the Astrobjects are done for the basic part (sphere display, texture, movement). Build a minimal and approximative solar system, that needs to be adjusted with ellipses. 

@@ -5,116 +5,14 @@
 
 using namespace glimac;
 
-
-
 enum VertexAttribute : GLuint {
   VERTEX_ATTR_POSITION   = 0,  // Position attribute
   VERTEX_ATTR_NORMAL     = 1,  // Normal attribute
   VERTEX_ATTR_TEX_COORDS = 2   // Texture coordinates attribute
 };
 
-enum TextureIdx {
-  TEX_EARTH_MAP,
-  TEX_CLOUD_MAP,
-  TEX_MOON_MAP,
+const uint NB_TEXTURES = 12;
 
-  NB_TEXTURES
-};
-
-static void _updateMatrices(
-  const glm::mat4& MVMatrix,
-  const glm::mat4& ProjMatrix,
-  const GLint uMVPMatrix_ref,
-  const GLint uMVMatrix_ref,
-  const GLint uNormalMatrix_ref
-)
-{
-  glm::mat4 NormalMatrix = glm::transpose(glm::inverse(MVMatrix));
-  glm::mat4 MVPMatrix    = ProjMatrix * MVMatrix;
-
-  // Set uniforms
-  glUniformMatrix4fv(uMVPMatrix_ref,    1u, GL_FALSE, glm::value_ptr(MVPMatrix));
-  glUniformMatrix4fv(uMVMatrix_ref,     1u, GL_FALSE, glm::value_ptr(MVMatrix));
-  glUniformMatrix4fv(uNormalMatrix_ref, 1u, GL_FALSE, glm::value_ptr(NormalMatrix));
-}
-
-struct EarthProgram {
-  Program m_program;
-
-  GLint m_uMVPMatrix_ref;
-  GLint m_uMVMatrix_ref;
-  GLint m_uNormalMatrix_ref;
-  GLint m_uEarthTexture_ref;
-  GLint m_uCloudTexture_ref;
-
-  EarthProgram(const FilePath& app_path)
-    : m_program { loadProgram(app_path.dirPath() + "shaders/3D.vs.glsl",
-                              app_path.dirPath() + "shaders/multiTex3D.fs.glsl")}
-  {
-    GLIMAC_CHECK_GLINT(m_uMVPMatrix_ref    = glGetUniformLocation(m_program.getGLId(), "uMVPMatrix"));
-    GLIMAC_CHECK_GLINT(m_uMVMatrix_ref     = glGetUniformLocation(m_program.getGLId(), "uMVMatrix")); // Unused
-    GLIMAC_CHECK_GLINT(m_uNormalMatrix_ref = glGetUniformLocation(m_program.getGLId(), "uNormalMatrix")); // Unused
-    GLIMAC_CHECK_GLINT(m_uEarthTexture_ref = glGetUniformLocation(m_program.getGLId(), "uEarthTexture"));
-    GLIMAC_CHECK_GLINT(m_uCloudTexture_ref = glGetUniformLocation(m_program.getGLId(), "uCloudTexture"));
-  }
-
-  void use()
-  {
-    m_program.use();
-    glUniform1i(m_uEarthTexture_ref, 0); // Earth texture is binded to Texture Unit 0
-    glUniform1i(m_uCloudTexture_ref, 1); // Earth texture is binded to Texture Unit 1
-  }
-
-  void setMatrices(const glm::mat4& earth_MVMatrix, const glm::mat4& ProjMatrix)
-  {
-    glUniformMatrix4fv(m_uMVPMatrix_ref,    1u, GL_FALSE, glm::value_ptr(ProjMatrix * earth_MVMatrix));
-    glUniformMatrix4fv(m_uMVMatrix_ref,     1u, GL_FALSE, glm::value_ptr(earth_MVMatrix));
-    glUniformMatrix4fv(m_uNormalMatrix_ref, 1u, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(earth_MVMatrix))));
-  }
-};
-
-struct MoonProgram {
-  Program m_program;
-
-  GLint m_uMVPMatrix_ref;
-  GLint m_uMVMatrix_ref;
-  GLint m_uNormalMatrix_ref;
-  GLint m_uTexture_ref;
-
-  MoonProgram(const FilePath& app_path)
-    : m_program { loadProgram(app_path.dirPath() + "shaders/3D.vs.glsl",
-                              app_path.dirPath() + "shaders/tex3D.fs.glsl")}
-  {
-    GLIMAC_CHECK_GLINT(m_uMVPMatrix_ref    = glGetUniformLocation(m_program.getGLId(), "uMVPMatrix"));
-    GLIMAC_CHECK_GLINT(m_uMVMatrix_ref     = glGetUniformLocation(m_program.getGLId(), "uMVMatrix")); // Unused
-    GLIMAC_CHECK_GLINT(m_uNormalMatrix_ref = glGetUniformLocation(m_program.getGLId(), "uNormalMatrix")); // Unused
-    GLIMAC_CHECK_GLINT(m_uTexture_ref      = glGetUniformLocation(m_program.getGLId(), "uTexture"));
-  }
-
-  void use()
-  {
-    m_program.use();
-    glUniform1i(m_uTexture_ref, 0); // Moon texture is binded to Texture Unit 0
-  }
-
-  void setMatrices(const glm::mat4& moon_MVMatrix, const glm::mat4& ProjMatrix)
-  {
-    glUniformMatrix4fv(m_uMVPMatrix_ref,    1u, GL_FALSE, glm::value_ptr(ProjMatrix * moon_MVMatrix));
-    glUniformMatrix4fv(m_uMVMatrix_ref,     1u, GL_FALSE, glm::value_ptr(moon_MVMatrix));
-    glUniformMatrix4fv(m_uNormalMatrix_ref, 1u, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(moon_MVMatrix))));
-  }
-};
-
-static std::unique_ptr<Image> _loadImage(
-  const FilePath& filepath
-)
-{
-  std::unique_ptr<Image> image = loadImage(filepath);
-  if (nullptr == image) {
-    throw std::runtime_error("Unable to load image (from file " + std::string(filepath) + ")");
-  }
-  return image;
-}
 
 int main(int argc, char** argv) {
   Visualizer visualizer;
@@ -139,7 +37,7 @@ int main(int argc, char** argv) {
   // create our astrobjects
   GN_Astrobject sun(applicationPath,
                     "Sun",
-                    1400000.f,
+                    700000.f/2.f,
                     GN_Point(0.f, 0.f, 0.f),
                     0.f,
                     0.f,
@@ -150,18 +48,116 @@ int main(int argc, char** argv) {
                     0
                     );
 
+
+
+    GN_Astrobject mercury(applicationPath,
+                "Mercury",
+                10*2436.f, // making bigger for better view
+                GN_Point(0.f, 0.f, 0.f),
+                69.8f,
+                46.f,
+                88.f,
+                0,
+                0,
+                applicationPath.dirPath() + "../../assets/textures/MercuryMap.jpg",
+                2
+                );
+
+    GN_Astrobject venus(applicationPath,
+            "Venus",
+            10*6052.f, // making bigger for better view
+            GN_Point(0.f, 0.f, 0.f),
+            108.9f,
+            107.5f,
+            226.7f,
+            0,
+            0,
+            applicationPath.dirPath() + "../../assets/textures/VenusMap.jpg",
+            3
+            );
+
     GN_Astrobject earth(applicationPath,
                     "Earth",
-                    12756.f,
+                    10*6378.f, // making bigger for better view
                     GN_Point(0.f, 0.f, 0.f),
-                    15.f,
-                    17.f,
+                    152.1f,
+                    147.1f,
                     365.2,
                     0,
                     0,
                     applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg",
                     1
                     );
+
+    GN_Astrobject mars(applicationPath,
+            "Mars",
+            10*3396.f, // making bigger for better view
+            GN_Point(0.f, 0.f, 0.f),
+            //249.3f,
+            200.f,
+            206.7f,
+            365.2,
+            0,
+            0,
+            applicationPath.dirPath() + "../../assets/textures/MarsMap.jpg",
+            4
+            );
+
+    GN_Astrobject jupiter(applicationPath,
+            "Jupiter",
+            10*71492.f, // making bigger for better view
+            GN_Point(0.f, 0.f, 0.f),
+            //816.4f,
+            250.f,
+            740.6f,
+            4331.f,
+            0,
+            0,
+            applicationPath.dirPath() + "../../assets/textures/JupiterMap.jpg",
+            5
+            );
+
+    GN_Astrobject saturn(applicationPath,
+            "Saturn",
+            10*60268.f, // making bigger for better view
+            GN_Point(0.f, 0.f, 0.f),
+            //1506.5f,
+            300.f,
+            1357.6f,
+            10747.f,
+            0,
+            0,
+            applicationPath.dirPath() + "../../assets/textures/SaturnMap.jpg",
+            6
+            );
+
+    GN_Astrobject uranus(applicationPath,
+            "Uranus",
+            10*25559.f, // making bigger for better view
+            GN_Point(0.f, 0.f, 0.f),
+            //3001.4f,
+            400.f,
+            2732.7f,
+            30689.f,
+            0,
+            0,
+            applicationPath.dirPath() + "../../assets/textures/UranusMap.jpg",
+            7
+            );
+
+    GN_Astrobject neptune(applicationPath,
+        "Neptune",
+        10*24764.f, // making bigger for better view
+        GN_Point(0.f, 0.f, 0.f),
+        //4558.9f,
+        450.f,
+        4471.1f,
+        59800.f,
+        0,
+        0,
+        applicationPath.dirPath() + "../../assets/textures/NeptuneMap.jpg",
+        8
+        );
 
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test
@@ -174,17 +170,6 @@ int main(int argc, char** argv) {
   Sphere sphere(sphere_radius, 32u, 32u);
   const ShapeVertex *sphere_vertices = sphere.getDataPointer();
   const GLsizei sphere_nb_vertices   = sphere.getVertexCount();
-
-  // Moons
-  // const uint nb_moons = 32u;
-  // std::array<std::tuple<glm::vec3,glm::vec3,float>, nb_moons> moon_prop;
-  // std::generate(
-  //   moon_prop.begin(), moon_prop.end(),
-  //   [sphere_radius]() {
-  //     float offset = glm::linearRand(0.f, 360.f);
-  //     return std::make_tuple(glm::sphericalRand(1.f), glm::sphericalRand(sphere_radius), offset);
-  //   }
-  // );
 
   // Vertex specification
   GLuint vbo;
@@ -224,6 +209,12 @@ int main(int argc, char** argv) {
 
   sun.bindTexture(textures);
   earth.bindTexture(textures);
+  mercury.bindTexture(textures);
+  venus.bindTexture(textures);
+  mars.bindTexture(textures);
+  jupiter.bindTexture(textures);
+  saturn.bindTexture(textures);
+  neptune.bindTexture(textures);
 
   // Application loop:
   const float pan_motio_speed = 1.f;
@@ -286,33 +277,34 @@ int main(int argc, char** argv) {
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
 
     // === SUN ===
-    sun.render();
-    sun.updatePosition(global_MVMatrix, ProjMatrix, time);
+    sun.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
 
-    // Set sun textures
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textures[sun.textureIndex()]); // Bind earth texture in TU 0
+    // === Mercury ===
+    mercury.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
 
-    // Draw sun vertices
-    glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
-
-
-    glBindTexture(GL_TEXTURE_2D, 0); // Unbind sun texture from TU 0
+    // === VENUS === 
+    mercury.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
 
     // === EARTH === 
-    earth.render();
-    earth.updatePosition(global_MVMatrix, ProjMatrix, time);
+    earth.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
 
-    // set texture
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, textures[earth.textureIndex()]); // Bind earth texture in TU 0
+    // === MARS === 
+    mars.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
 
-    // draw
-    glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
+    // === Jupiter === 
+    mars.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
 
-    glBindTexture(GL_TEXTURE_2D, 0); // Unbind moon texture from TU 0
+    // === Saturn === 
+    saturn.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+
+    // === Uranus ===
+    uranus.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    
+    // === Neptune ===
+    neptune.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices);
+    
+
     glBindVertexArray(0); // Unbind vao (from active VAO)
-
     // Update the display
     windowManager.swapBuffers();
   }

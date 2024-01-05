@@ -14,18 +14,30 @@ void GN_Astrobject::setMatrices(const glm::mat4& MVMatrix, const glm::mat4& Proj
 void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time) {
 	glm::mat4 MVMatrix = globalMVMatrix;
 
-	const float ratio = 10* _radius/SUN_RADIUS;
+	const float ratio = _radius/SUN_RADIUS;
 
 	// rotation
 	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
 	// translation
-	MVMatrix = glm::translate(MVMatrix, glm::vec3(-ratio*_aphelion, 0, 0));
+	MVMatrix = glm::translate(MVMatrix, glm::vec3(-ratio*_aphelion/5, 0, 0));
 	// scale
 	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
 
 	setMatrices(MVMatrix, ProjMatrix);
-	//setMatrices(MVMatrix, ProjMatrix);
+}
 
+void GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices) {
+    render();
+    updatePosition(globalMVMatrix, ProjMatrix, time);
+
+    // Set textures
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textures[_textureIndex]); // Bind earth texture in TU 0
+
+    // Draw vertices
+    glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
+
+    glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture from TU 0
 }
 
 void GN_Astrobject::bindTexture(GLuint *textures) {

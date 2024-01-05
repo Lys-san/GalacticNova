@@ -72,6 +72,8 @@ public:
 	/** Get current Astrobject coordinate (center of sphere) */
 	GN_Point getCurrentCoordinates();
 
+	void display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices);
+
 	/** updates MVMatrix */
 	void updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time);
 
