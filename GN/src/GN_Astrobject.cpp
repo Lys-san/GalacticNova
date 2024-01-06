@@ -54,12 +54,19 @@ glm::mat4 GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const float re
 
     glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture from TU 0
 
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, textures[99]); // Bind earth texture in TU 0
+
+
     if(_hasRings) {
     	for(uint i = 0; i < N_ASTEROIDS; i++) {
-    		setMatrices(_asterMatrices[i], ProjMatrix);
+    		setMatrices(MVMatrix * _asterMatrices[i], ProjMatrix);
     		glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
     	}
     }
+    glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture from TU 0
+
+
 
     return MVMatrix;
 }
@@ -67,21 +74,21 @@ glm::mat4 GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const float re
 void GN_Astrobject::generateAsteroidsMatrices() {
 	_asterMatrices = new glm::mat4[N_ASTEROIDS];
 
-	float radius = 50.;
-	float offset = 2.5f;
+	float radius = 1.5;
+	float offset = 0.5f;
 	for(uint i = 0; i < N_ASTEROIDS; i++) {
 		glm::mat4 model = glm::mat4(1.f);
 		float angle = (float)i / (float)N_ASTEROIDS * 360.0f;
 	    float displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
 	    float x = sin(angle) * radius + displacement;
 	    displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
-	    float y = displacement * 0.4f; // keep height of field smaller compared to width of x and z
+	    float y = displacement * 0.15f; // keep height of field smaller compared to width of x and z
 	    displacement = (rand() % (int)(2 * offset * 100)) / 100.0f - offset;
 	    float z = cos(angle) * radius + displacement;
 	    model = glm::translate(model, glm::vec3(x, y, z));
 
 	    // 2. scale: scale between 0.05 and 0.25f
-	    float scale = (rand() % 20) / 100.0f + 0.05;
+	    float scale = (rand() % 10) / 1000.0f + 0.025;
 	    model = glm::scale(model, glm::vec3(scale));
 
 	    // 3. rotation: add random rotation around a (semi)randomly picked rotation axis vector
@@ -93,6 +100,8 @@ void GN_Astrobject::generateAsteroidsMatrices() {
 
 	    _hasRings = true;
 	}
+
+
 }
 
 void GN_Astrobject::bindTexture(GLuint *textures) {

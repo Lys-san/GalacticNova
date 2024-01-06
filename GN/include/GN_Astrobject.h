@@ -22,7 +22,7 @@
 using namespace glimac;
 
 const GLfloat SUN_DIAMETER = 1400000.f;
-const uint    N_ASTEROIDS  = 1000;
+const uint    N_ASTEROIDS  = 200;
 
 const std::vector<std::string> PLANET_WITH_RINGS{"Jupyter", "Saturn", "Uranus", "Neptune"};
 
@@ -104,8 +104,10 @@ public:
 
 	bool hasRings() const;
 
-private:
 	static std::unique_ptr<Image> _loadImage(const FilePath &filepath);
+
+private:
+	
 
 	// base attributes
 	Program                _program;

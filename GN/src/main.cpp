@@ -11,8 +11,7 @@ enum VertexAttribute : GLuint {
   VERTEX_ATTR_TEX_COORDS = 2   // Texture coordinates attribute
 };
 
-const uint NB_TEXTURES = 12;
-
+const uint NB_TEXTURES = 100;
 
 int main(int argc, char** argv) {
   Visualizer visualizer;
@@ -33,6 +32,11 @@ int main(int argc, char** argv) {
 
   // Shaders loading, compilation and uniforms location
   // Program program = Visualizer::initProgram(applicationPath);
+
+
+  std::unique_ptr<Image> asterMapImage  = GN_Astrobject::_loadImage(
+    applicationPath.dirPath() + "../../assets/textures/rock.png"
+  );
 
   // create our astrobjects
     GN_Astrobject sun(applicationPath,
@@ -230,6 +234,7 @@ int main(int argc, char** argv) {
         true
         );
 
+
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test
   glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), window_ar, 0.1f, 100.f); 
@@ -275,6 +280,9 @@ int main(int argc, char** argv) {
   glBindVertexArray(0); // Unbind VAO
 
   uranus.generateAsteroidsMatrices();
+  jupiter.generateAsteroidsMatrices();
+  saturn.generateAsteroidsMatrices();
+  neptune.generateAsteroidsMatrices();
 
   // texture specification
   GLuint textures[NB_TEXTURES];
@@ -291,6 +299,19 @@ int main(int argc, char** argv) {
   neptune.bindTexture(textures);
   pluto.bindTexture(textures);
   moon.bindTexture(textures);
+
+  // for rock too
+	const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...
+	const GLenum mag_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR
+
+  glActiveTexture(GL_TEXTURE0);
+  glBindTexture(GL_TEXTURE_2D, textures[NB_TEXTURES-1]); // Bind texture object
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, asterMapImage->getWidth(), asterMapImage->getHeight(), 0, GL_RGBA, GL_FLOAT, asterMapImage->getPixels()); // Load texture image
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, min_filter);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, mag_filter);
+  glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture
+
+
 
   // Application loop:
   const float pan_motio_speed = 1.f;
