@@ -28,7 +28,7 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 	double radius = (_excentricity == 0) ? 0 : 1 - _excentricity*cos((360/_orbitalPeriod)*(time));
 	radius *= 50;
 
-	MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0)); //-ratio*_aphelion
+	MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0));
 	// scale
 	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
 	// self rotation

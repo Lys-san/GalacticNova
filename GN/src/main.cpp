@@ -193,7 +193,7 @@ int main(int argc, char** argv) {
         "Moon",
         3475.f,
         GN_Point(0.f, 0.f, 0.f),
-        384440.f,
+        384400.f,
         0.0549f,
         0.,
         0.,
@@ -215,13 +215,13 @@ int main(int argc, char** argv) {
         0.,
         1.08,
         applicationPath.dirPath() + "../../assets/textures/PhobosMap.jpg",
-        10,
+        11,
         true
         );
 
     GN_Astrobject deimos(applicationPath,
         "Deimos",
-        425.88, //Or 238.68f, // can't find the radius or diameter
+        425.88f,
         GN_Point(0.f, 0.f, 0.f),
         23459.f,
         0.0005f,
@@ -230,7 +230,307 @@ int main(int argc, char** argv) {
         0.,
         1.79,
         applicationPath.dirPath() + "../../assets/textures/DeimosMap.jpg",
-        10,
+        12,
+        true
+        );
+
+    GN_Astrobject callisto(applicationPath,
+        "Callisto",
+        4821.f,
+        GN_Point(0.f, 0.f, 0.f),
+        1882700.f,
+        0.007f,
+        0.,
+        0.,
+        0.,
+        0.19,
+        applicationPath.dirPath() + "../../assets/textures/CallistoMap.jpg",
+        13,
+        true
+        );
+
+    GN_Astrobject ganymede(applicationPath,
+        "Ganymede",
+        5262.f,
+        GN_Point(0.f, 0.f, 0.f),
+        1070400.f,
+        0.001f,
+        0.,
+        0.,
+        0.,
+        0.18,
+        applicationPath.dirPath() + "../../assets/textures/GanymedeMap.jpg",
+        14,
+        true
+        );
+
+    GN_Astrobject europa(applicationPath,
+        "Europa",
+        3122.f, 
+        GN_Point(0.f, 0.f, 0.f),
+        671100.f,
+        0.009f,
+        0.,
+        0.,
+        0.,
+        0.47,
+        applicationPath.dirPath() + "../../assets/textures/EuropaMap.jpg",
+        15,
+        true
+        );
+
+    GN_Astrobject io(applicationPath,
+        "Io",
+        3643.f,
+        GN_Point(0.f, 0.f, 0.f),
+        421800.f,
+        0.004f,
+        0.,
+        0.,
+        0.,
+        0.04,
+        applicationPath.dirPath() + "../../assets/textures/IoMap.jpg",
+        16,
+        true
+        );
+
+    GN_Astrobject mimas(applicationPath,
+        "Mimas",
+        397.3f,
+        GN_Point(0.f, 0.f, 0.f),
+        185.52f,
+        0.0202f,
+        0.,
+        0.,
+        0.,
+        1.53,
+        applicationPath.dirPath() + "../../assets/textures/MimasMap.png",
+        17,
+        true
+        );
+
+    GN_Astrobject enceladus(applicationPath,
+        "Enceladus",
+        504.f,
+        GN_Point(0.f, 0.f, 0.f),
+        238.02f,
+        0.0045f,
+        0.,
+        0.,
+        0.,
+        0.,
+        applicationPath.dirPath() + "../../assets/textures/EnceladusMap.jpg",
+        18,
+        true
+        );
+
+    GN_Astrobject tethys(applicationPath,
+        "Tethys",
+        1061.3f,
+        GN_Point(0.f, 0.f, 0.f),
+        294.66f,
+        0.f,
+        0.,
+        0.,
+        0.,
+        1.86,
+        applicationPath.dirPath() + "../../assets/textures/TethysMap.jpg",
+        19,
+        true
+        );
+
+    GN_Astrobject dione(applicationPath,
+        "Dione",
+        1122.7f,
+        GN_Point(0.f, 0.f, 0.f),
+        377.40f,
+        0.0022f,
+        0.,
+        0.,
+        0.,
+        0.02,
+        applicationPath.dirPath() + "../../assets/textures/DioneMap.jpg",
+        20,
+        true
+        );
+
+    GN_Astrobject rhea(applicationPath,
+        "Rhea",
+        1526.7f,
+        GN_Point(0.f, 0.f, 0.f),
+        527.04f,
+        0.0010f,
+        0.,
+        0.,
+        0.,
+        0.35,
+        applicationPath.dirPath() + "../../assets/textures/RheaMap.jpg",
+        21,
+        true
+        );
+
+    GN_Astrobject titan(applicationPath,
+        "Titan",
+        2575.f,
+        GN_Point(0.f, 0.f, 0.f),
+        1221.87f,
+        0.0292f,
+        0.,
+        0.,
+        0.,
+        0.33,
+        applicationPath.dirPath() + "../../assets/textures/TitanMap.jpg",
+        22,
+        true
+        );
+
+    GN_Astrobject hyperion(applicationPath,
+        "Hyperion",
+        277.3f,
+        GN_Point(0.f, 0.f, 0.f),
+        1500.93f,
+        0.1042f,
+        0.,
+        0.,
+        0.,
+        0.43,
+        applicationPath.dirPath() + "../../assets/textures/HyperionMap.jpg",
+        23,
+        true
+        );
+
+    GN_Astrobject iapetus(applicationPath,
+        "Iapetus",
+        1468.7f,
+        GN_Point(0.f, 0.f, 0.f),
+        3560.85f,
+        0.0283f,
+        0.,
+        0.,
+        0.,
+        14.72,
+        applicationPath.dirPath() + "../../assets/textures/IapetusMap.jpg",
+        24,
+        true
+        );
+
+    GN_Astrobject ariel(applicationPath,
+        "Ariel",
+        1157.8f,
+        GN_Point(0.f, 0.f, 0.f),
+        190900.f,
+        0.0012f,
+        0.,
+        0.,
+        0.,
+        0.04,
+        applicationPath.dirPath() + "../../assets/textures/ArielMap.jpg",
+        25,
+        true
+        );
+
+    GN_Astrobject umbriel(applicationPath,
+        "Umbriel",
+        1169.4f,
+        GN_Point(0.f, 0.f, 0.f),
+        266000.f,
+        0.0039f,
+        0.,
+        0.,
+        0.,
+        0.13,
+        applicationPath.dirPath() + "../../assets/textures/UmbrielMap.jpg",
+        26,
+        true
+        );
+
+    GN_Astrobject titania(applicationPath,
+        "Titania",
+        1577.8f,
+        GN_Point(0.f, 0.f, 0.f),
+        436300.f,
+        0.0011f,
+        0.,
+        0.,
+        0.,
+        0.08,
+        applicationPath.dirPath() + "../../assets/textures/TitaniaMap.jpg",
+        27,
+        true
+        );
+
+    GN_Astrobject oberon(applicationPath,
+        "Oberon",
+        1522.8f,
+        GN_Point(0.f, 0.f, 0.f),
+        583500.f,
+        0.0014f,
+        0.,
+        0.,
+        0.,
+        0.07,
+        applicationPath.dirPath() + "../../assets/textures/OberonMap.jpg",
+        28,
+        true
+        );
+
+    GN_Astrobject miranda(applicationPath,
+        "Miranda",
+        471.4f,
+        GN_Point(0.f, 0.f, 0.f),
+        129900.f,
+        0.0013f,
+        0.,
+        0.,
+        0.,
+        4.34,
+        applicationPath.dirPath() + "../../assets/textures/MirandaMap.jpg",
+        29,
+        true
+        );
+
+    GN_Astrobject triton(applicationPath,
+        "Triton",
+        2706.8f,
+        GN_Point(0.f, 0.f, 0.f),
+        354760.f,
+        0.000016f,
+        0.,
+        0.,
+        0.,
+        157.345,
+        applicationPath.dirPath() + "../../assets/textures/TritonMap.jpg",
+        30,
+        true
+        );
+
+    GN_Astrobject nereid(applicationPath,
+        "Nereid",
+        340.f,
+        GN_Point(0.f, 0.f, 0.f),
+        5513400.f,
+        0.7512f,
+        0.,
+        0.,
+        0.,
+        7.23,
+        applicationPath.dirPath() + "../../assets/textures/NereidMap.jpg",
+        31,
+        true
+        );
+
+    GN_Astrobject charon(applicationPath,
+        "Charon",
+        1212, // radius = 606
+        GN_Point(0.f, 0.f, 0.f),
+        19596.f,
+        0.f,
+        0.,
+        0.,
+        0.,
+        0.00005,
+        applicationPath.dirPath() + "../../assets/textures/CharonMap.jpg",
+        32,
         true
         );
 
@@ -299,6 +599,28 @@ int main(int argc, char** argv) {
   neptune.bindTexture(textures);
   pluto.bindTexture(textures);
   moon.bindTexture(textures);
+  phobos.bindTexture(textures);
+  deimos.bindTexture(textures);
+  callisto.bindTexture(textures);
+  ganymede.bindTexture(textures);
+  europa.bindTexture(textures);
+  io.bindTexture(textures);
+  mimas.bindTexture(textures);
+  enceladus.bindTexture(textures);
+  tethys.bindTexture(textures);
+  dione.bindTexture(textures);
+  rhea.bindTexture(textures);
+  titan.bindTexture(textures);
+  hyperion.bindTexture(textures);
+  iapetus.bindTexture(textures);
+  ariel.bindTexture(textures);
+  umbriel.bindTexture(textures);
+  titania.bindTexture(textures);
+  oberon.bindTexture(textures);
+  miranda.bindTexture(textures);
+  triton.bindTexture(textures);
+  nereid.bindTexture(textures);
+  charon.bindTexture(textures);
 
   // for rock too
 	const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...
@@ -384,40 +706,107 @@ int main(int argc, char** argv) {
     sun.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, 0);
 
     // === Mercury ===
-    mercury.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -12);
+    mercury.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -11);
 
     // === VENUS === 
-    venus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -14);
+    venus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -12);
 
     // === EARTH === 
-    glm::mat4 earthMVMatrix = earth.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -16);
+    glm::mat4 earthMVMatrix = earth.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -13);
 
     // === MARS === 
-    glm::mat4 marsMVMatrix = mars.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -18);
+    glm::mat4 marsMVMatrix = mars.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -14);
 
     // === Jupiter === 
-    jupiter.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -20);
+    glm::mat4 jupiterMVMatrix = jupiter.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -18);
 
     // === Saturn === 
-    saturn.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -22);
+    glm::mat4 saturnMVMatrix = saturn.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -22);
 
     // === Uranus ===
-    uranus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -24);
+    glm::mat4 uranusMVMatrix = uranus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -26);
     
     // === Neptune ===
-    neptune.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -26);
+    glm::mat4 neptuneMVMatrix = neptune.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -28);
     
     // === Pluto ===
-    pluto.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -28);
+    glm::mat4 plutoMVMatrix = pluto.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -30);
 
+    // ==== Earth satellites ====
     // === Moon ===
     moon.display(earthMVMatrix, earth.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
 
+    // ==== Mars satellites ====
     // === Phobos ===
     phobos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -3);
 
     // === Deimos ===
     deimos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+
+    // ==== Jupiter satellites ====
+    // === Callisto ===
+    callisto.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -13);
+
+    // === Ganymede ===
+    ganymede.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+  
+    // === Europa ===
+    europa.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -7);
+
+    // === Io ===
+    io.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -9);
+
+    // ==== Saturn satellites ====
+    // === Mimas ===
+    mimas.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -3);
+
+    // === Enceladus ===
+    enceladus.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+  
+    // === Tethys ===
+    tethys.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -7);
+
+    // === Dione ===
+    dione.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -9);
+
+    // === Rhea ===
+    rhea.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -11);
+
+    // === Titan ===
+    titan.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -13);
+  
+    // === Hyperion ===
+    hyperion.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -15);
+
+    // === Iapetus ===
+    iapetus.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -17);
+
+    // ==== Uranus satellites ====
+    // === Ariel ===
+    ariel.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3);
+
+    // === Umbriel ===
+    umbriel.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -5);
+
+    // === Titania ===
+    titania.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -7);
+  
+    // === Oberon ===
+    oberon.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -9);
+
+    // // === Miranda ===
+    miranda.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3); //-11
+
+    // ==== Neptune satellites ====
+    // === Triton ===
+    triton.display(neptuneMVMatrix, neptune.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3);
+
+    // === Nereid ===
+    nereid.display(neptuneMVMatrix, neptune.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -5);
+
+    // ==== Pluto satellites ====
+    // === Charon ===
+    charon.display(plutoMVMatrix, pluto.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3);
 
     glBindVertexArray(0); // Unbind vao (from active VAO)
     // Update the display
