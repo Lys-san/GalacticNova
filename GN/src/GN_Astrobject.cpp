@@ -11,7 +11,7 @@ void GN_Astrobject::setMatrices(const glm::mat4& MVMatrix, const glm::mat4& Proj
 	glUniformMatrix4fv(_uNormalMatrixRef, 1u, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
 }
 
-glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, int deplacement) {
+glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, bool debugMode) {
 	glm::mat4 MVMatrix = refMVMatrix;
 
 	float ratio = _diameter/refDiameter;
@@ -20,20 +20,26 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
         ratio *= 10;
     }
 
-	// rotation around the sun
-	MVMatrix = glm::rotate(MVMatrix, (time)*(float)_orbitalPeriod/100000.f, glm::vec3(0, 1, 0));
-	// translation
+    if(debugMode){
+        MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
+        float move = (_isSatellite)? -_perihelion : ((_name == "Sun")? 0:-(_perihelion/100) - 10);
+        MVMatrix = glm::translate(MVMatrix, glm::vec3(move, 0, 0));
+    } else {
+        // rotation around the sun
+        MVMatrix = glm::rotate(MVMatrix, (time)*(float)_orbitalPeriod/100000.f, glm::vec3(0, 1, 0));
+        // translation
 
-	// radius from current astrobject <--> other astrobject it's orbiting around 
-	double radius = 0;
-	if(_orbitalPeriod != 0) {
-		int day = (int)time % (int)_orbitalPeriod;
-		radius = 1 - _excentricity*cos((360/_orbitalPeriod/100000.f)*(day));
-	}
+        // radius from current astrobject <--> other astrobject it's orbiting around 
+        double radius = 0;
+        if(_orbitalPeriod != 0) {
+            int day = (int)time % (int)_orbitalPeriod;
+            radius = 1 - _excentricity*cos((360/_orbitalPeriod/100000.f)*(day));
+        }
 
-	radius *= 50;
+        radius *= 50;
 
-	MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0));
+        MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0));
+    }
 	// scale
 	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
 	// self rotation
@@ -44,9 +50,9 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
     return MVMatrix;
 }
 
-glm::mat4 GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement) {
+glm::mat4 GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, bool debugMode) {
     render();
-    glm::mat4 MVMatrix = updatePosition(globalMVMatrix, refDiameter, ProjMatrix, time, deplacement);
+    glm::mat4 MVMatrix = updatePosition(globalMVMatrix, refDiameter, ProjMatrix, time, debugMode);
 
 
 

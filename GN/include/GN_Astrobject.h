@@ -81,10 +81,10 @@ public:
 	/** Get current Astrobject coordinate (center of sphere) */
 	GN_Point getCurrentCoordinates();
 
-	glm::mat4 display(const glm::mat4 &globalMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement);
+	glm::mat4 display(const glm::mat4 &globalMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, bool debugMode);
 
 	/** updates MVMatrix and return it */
-	glm::mat4 updatePosition(const glm::mat4 &refMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, int deplacement);
+	glm::mat4 updatePosition(const glm::mat4 &refMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, bool debugMode);
 
 	void activeTexture();
 

@@ -13,3 +13,7 @@ Happy new year ! (I wish could've started this project sooner). Anyway, the GN_A
 [01.05.2024]
 
 What a productive day today ! Finally fixed texture stuff and the Astrobjects are done for the basic part (sphere display, texture, movement). Build a minimal and approximative solar system, that needs to be adjusted with ellipses. 
+
+[01.06.2024]
+
+Today we added all the moons required. We also work on the trajectories of the Astrobjects. Staturn and Uranus have rings ! We added a debugMode to see all planets and moons line up
