@@ -30,6 +30,7 @@ public:
 		GN_Point    barycenter,
 		GLfloat     aphelion, // Semi-major axis for satellite
 		GLfloat     perihelion, // excentricity for satellite
+		GLfloat     excentricity,
 		double      orbitalPeriod,
 		double      lengthOfDays,
 		double      orbitalInclination,
@@ -44,6 +45,7 @@ public:
 	_barycenter(barycenter),
 	_aphelion(aphelion),
 	_perihelion(perihelion),
+	_excentricity(excentricity),
 	_orbitalPeriod(orbitalPeriod),
 	_lengthOfDays(lengthOfDays),
 	_orbitalInclination(orbitalInclination),
@@ -103,6 +105,7 @@ private:
 	GN_Point               _barycenter;
 	GLfloat                _aphelion;
 	GLfloat                _perihelion;
+	GLfloat                _excentricity;
 	double                 _orbitalPeriod;
 	double                 _lengthOfDays;
 	double                 _orbitalInclination;
