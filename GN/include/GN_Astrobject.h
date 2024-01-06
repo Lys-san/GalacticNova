@@ -16,10 +16,15 @@
 #include <memory>
 #include "GN_Point.h"
 #include <iostream>
+#include <algorithm>
+#include <GL/glew.h>
 
 using namespace glimac;
 
 const GLfloat SUN_DIAMETER = 1400000.f;
+const uint    N_ASTEROIDS  = 1000;
+
+const std::vector<std::string> PLANET_WITH_RINGS{"Jupyter", "Saturn", "Uranus", "Neptune"};
 
 class GN_Astrobject {
 public:
@@ -83,6 +88,8 @@ public:
 
 	void activeTexture();
 
+	void generateAsteroidsMatrices();
+
 	void loadShaders();
 
 	/** Initializes at position*/
@@ -94,6 +101,8 @@ public:
 	GLuint textureIndex() const;
 
 	GLfloat getDiameter() const;
+
+	bool hasRings() const;
 
 private:
 	static std::unique_ptr<Image> _loadImage(const FilePath &filepath);
@@ -111,6 +120,10 @@ private:
 	double                 _orbitalInclination;
 	std::unique_ptr<Image> _mapImage;
 	bool                   _isSatellite;
+
+	bool                   _hasRings = false;
+
+	glm::mat4 *_asterMatrices;
 
 	// rendering
 	// Sphere       _body;

@@ -242,6 +242,7 @@ int main(int argc, char** argv) {
   const ShapeVertex *sphere_vertices = sphere.getDataPointer();
   const GLsizei sphere_nb_vertices   = sphere.getVertexCount();
 
+
   // Vertex specification
   GLuint vbo;
   glCreateBuffers(1, &vbo);
@@ -273,6 +274,7 @@ int main(int argc, char** argv) {
   glBindBuffer(GL_ARRAY_BUFFER, 0); // Unbind VBO
   glBindVertexArray(0); // Unbind VAO
 
+  uranus.generateAsteroidsMatrices();
 
   // texture specification
   GLuint textures[NB_TEXTURES];
