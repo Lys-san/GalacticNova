@@ -295,7 +295,7 @@ int main(int argc, char** argv) {
   const float left_right_motion_speed = 100.f;
 
   bool done = false;
-  bool animation = false;
+  bool animation = true;
   float time = 0.f;
   while (!done) {
     // Event loop:

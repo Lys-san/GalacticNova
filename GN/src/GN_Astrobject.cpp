@@ -21,13 +21,12 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
     }
 
 	// rotation around the sun
-	MVMatrix = glm::rotate(MVMatrix, (time)*(float)_orbitalPeriod/10000.f, glm::vec3(0, 1, 0));
+	MVMatrix = glm::rotate(MVMatrix, (time)*(float)_orbitalPeriod/100000.f, glm::vec3(0, 1, 0));
 	// translation
 
 	// radius from current astrobject <--> other astrobject it's orbiting around 
-	
-	float radius = (_aphelion == 0) ? 0 : 1 - _excentricity*cos((360/_orbitalPeriod)*(((int)time)%(int)_orbitalPeriod));
-	radius *= 10;
+	double radius = (_aphelion == 0) ? 0 : 1 - _excentricity*cos((360/_orbitalPeriod)*(time));
+	radius *= 50;
 
 	MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0)); //-ratio*_aphelion
 	// scale
