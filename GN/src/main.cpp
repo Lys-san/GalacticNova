@@ -45,7 +45,8 @@ int main(int argc, char** argv) {
         600.f,
         0,
         applicationPath.dirPath() + "../../assets/textures/SunMap.jpg",
-        0
+        0,
+        false
         );
 
     GN_Astrobject mercury(applicationPath,
@@ -58,7 +59,8 @@ int main(int argc, char** argv) {
         4222.6,
         7.,
         applicationPath.dirPath() + "../../assets/textures/MercuryMap.jpg",
-        1
+        1,
+        false
         );
 
     GN_Astrobject venus(applicationPath,
@@ -71,7 +73,8 @@ int main(int argc, char** argv) {
         2802.,
         3.4,
         applicationPath.dirPath() + "../../assets/textures/VenusMap.jpg",
-        2
+        2,
+        false
         );
 
     GN_Astrobject earth(applicationPath,
@@ -84,7 +87,8 @@ int main(int argc, char** argv) {
         24.,
         0.,
         applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg",
-        3
+        3,
+        false
         );
 
     GN_Astrobject mars(applicationPath,
@@ -97,7 +101,8 @@ int main(int argc, char** argv) {
         24.7,
         1.8,
         applicationPath.dirPath() + "../../assets/textures/MarsMap.jpg",
-        4
+        4,
+        false
         );
 
     GN_Astrobject jupiter(applicationPath,
@@ -110,7 +115,8 @@ int main(int argc, char** argv) {
         9.9,
         1.3,
         applicationPath.dirPath() + "../../assets/textures/JupiterMap.jpg",
-        5
+        5,
+        false
         );
 
     GN_Astrobject saturn(applicationPath,
@@ -123,7 +129,8 @@ int main(int argc, char** argv) {
         10.7,
         2.5,
         applicationPath.dirPath() + "../../assets/textures/SaturnMap.jpg",
-        6
+        6,
+        false
         );
 
     GN_Astrobject uranus(applicationPath,
@@ -136,7 +143,8 @@ int main(int argc, char** argv) {
         17.2,
         0.8,
         applicationPath.dirPath() + "../../assets/textures/UranusMap.jpg",
-        7
+        7,
+        false
         );
 
     GN_Astrobject neptune(applicationPath,
@@ -149,7 +157,8 @@ int main(int argc, char** argv) {
         16.1,
         1.8,
         applicationPath.dirPath() + "../../assets/textures/NeptuneMap.jpg",
-        8
+        8,
+        false
         );
 
     GN_Astrobject pluto(applicationPath,
@@ -162,7 +171,50 @@ int main(int argc, char** argv) {
         153.3,
         17.2,
         applicationPath.dirPath() + "../../assets/textures/PlutoMap.jpg",
-        9
+        9,
+        false
+        );
+
+    GN_Astrobject moon(applicationPath,
+        "Moon",
+        3475.f,
+        GN_Point(0.f, 0.f, 0.f),
+        384440.f,
+        0.0549f,
+        0.,
+        0.,
+        5.145,
+        applicationPath.dirPath() + "../../assets/textures/MoonMap.jpg",
+        10,
+        true
+        );
+
+    GN_Astrobject phobos(applicationPath,
+        "Phobos",
+        1348.62f, // can't find the radius or diameter
+        GN_Point(0.f, 0.f, 0.f),
+        9378.f,
+        0.0151f,
+        0.,
+        0.,
+        1.08,
+        applicationPath.dirPath() + "../../assets/textures/PhobosMap.jpg",
+        10,
+        true
+        );
+
+    GN_Astrobject deimos(applicationPath,
+        "Deimos",
+        425.88, //Or 238.68f, // can't find the radius or diameter
+        GN_Point(0.f, 0.f, 0.f),
+        23459.f,
+        0.0005f,
+        0.,
+        0.,
+        1.79,
+        applicationPath.dirPath() + "../../assets/textures/DeimosMap.jpg",
+        10,
+        true
         );
 
   // Init rendering and camera
@@ -223,12 +275,15 @@ int main(int argc, char** argv) {
   uranus.bindTexture(textures);
   neptune.bindTexture(textures);
   pluto.bindTexture(textures);
+  moon.bindTexture(textures);
 
   // Application loop:
   const float pan_motio_speed = 1.f;
   const float left_right_motion_speed = 100.f;
 
   bool done = false;
+  bool animation = false;
+  float time = 0.f;
   while (!done) {
     // Event loop:
     SDL_Event e;
@@ -253,6 +308,9 @@ int main(int argc, char** argv) {
           break;
         case SDLK_d:
           camera.moveLeft(pan_motio_speed);
+          break;
+        case SDLK_t:
+          animation = !animation;
           break;
         case SDLK_ESCAPE:
           done = true; // Leave the loop after this iteration
@@ -279,40 +337,51 @@ int main(int argc, char** argv) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear rendering buffer
 
     glBindVertexArray(vao); // Bind vao as active VAO
-    float time = windowManager.getTime();
+    if (animation){
+      time = windowManager.getTime();
+    }
 
     // Compute global matrices
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
 
     // === SUN ===
-    sun.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, 0);
+    sun.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, 0);
 
     // === Mercury ===
-    mercury.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -12);
+    mercury.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -12);
 
     // === VENUS === 
-    venus.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -14);
+    venus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -14);
 
     // === EARTH === 
-    earth.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -16);
+    glm::mat4 earthMVMatrix = earth.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -16);
 
     // === MARS === 
-    mars.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -18);
+    glm::mat4 marsMVMatrix = mars.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -18);
 
     // === Jupiter === 
-    jupiter.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -20);
+    jupiter.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -20);
 
     // === Saturn === 
-    saturn.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -22);
+    saturn.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -22);
 
     // === Uranus ===
-    uranus.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -24);
+    uranus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -24);
     
     // === Neptune ===
-    neptune.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -26);
+    neptune.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -26);
     
     // === Pluto ===
-    pluto.display(global_MVMatrix, ProjMatrix, time, textures, sphere_nb_vertices, -28);
+    pluto.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -28);
+
+    // === Moon ===
+    moon.display(earthMVMatrix, earth.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+
+    // === Phobos ===
+    phobos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -3);
+
+    // === Deimos ===
+    deimos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
 
     glBindVertexArray(0); // Unbind vao (from active VAO)
     // Update the display

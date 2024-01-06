@@ -28,16 +28,18 @@ public:
 		std::string name,
 		GLfloat     diameter,
 		GN_Point    barycenter,
-		GLfloat     aphelion, 
-		GLfloat     perihelion,
+		GLfloat     aphelion, // Semi-major axis for satellite
+		GLfloat     perihelion, // excentricity for satellite
 		double      orbitalPeriod,
 		double      lengthOfDays,
 		double      orbitalInclination,
 		FilePath    texturePath,
-		GLuint      textureIndex
+		GLuint      textureIndex,
+		bool isSatellite
 		) :
 	_program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
                               applicationPath.dirPath() + "shaders/tex3D.fs.glsl")),
+	_name (name),
 	_diameter (diameter),
 	_barycenter(barycenter),
 	_aphelion(aphelion),
@@ -46,7 +48,8 @@ public:
 	_lengthOfDays(lengthOfDays),
 	_orbitalInclination(orbitalInclination),
 	_mapImage(loadImage(texturePath)),
-	_textureIndex(textureIndex) {
+	_textureIndex(textureIndex),
+	_isSatellite(isSatellite) {
 		// load matrix refs
 	    GLIMAC_CHECK_GLINT(_uMVPMatrixRef    = glGetUniformLocation(_program.getGLId(), "uMVPMatrix"));
 		GLIMAC_CHECK_GLINT(_uMVMatrixRef     = glGetUniformLocation(_program.getGLId(), "uMVMatrix")); // Unused
@@ -71,10 +74,10 @@ public:
 	/** Get current Astrobject coordinate (center of sphere) */
 	GN_Point getCurrentCoordinates();
 
-	void display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement);
+	glm::mat4 display(const glm::mat4 &globalMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement);
 
-	/** updates MVMatrix */
-	void updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, int deplacement);
+	/** updates MVMatrix and return it */
+	glm::mat4 updatePosition(const glm::mat4 &refMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, int deplacement);
 
 	void activeTexture();
 
@@ -88,11 +91,14 @@ public:
 
 	GLuint textureIndex() const;
 
+	GLfloat getDiameter() const;
+
 private:
 	static std::unique_ptr<Image> _loadImage(const FilePath &filepath);
 
 	// base attributes
 	Program                _program;
+	std::string            _name;
 	GLfloat                _diameter;
 	GN_Point               _barycenter;
 	GLfloat                _aphelion;
@@ -101,6 +107,7 @@ private:
 	double                 _lengthOfDays;
 	double                 _orbitalInclination;
 	std::unique_ptr<Image> _mapImage;
+	bool                   _isSatellite;
 
 	// rendering
 	// Sphere       _body;

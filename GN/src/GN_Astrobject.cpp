@@ -11,10 +11,13 @@ void GN_Astrobject::setMatrices(const glm::mat4& MVMatrix, const glm::mat4& Proj
 	glUniformMatrix4fv(_uNormalMatrixRef, 1u, GL_FALSE, glm::value_ptr(glm::transpose(glm::inverse(MVMatrix))));
 }
 
-void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, int deplacement) {
-	glm::mat4 MVMatrix = globalMVMatrix;
+glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, int deplacement) {
+	glm::mat4 MVMatrix = refMVMatrix;
 
-	const float ratio = _diameter/SUN_DIAMETER;
+	float ratio = _diameter/refDiameter;
+    if (!_isSatellite){
+        ratio *= 10;
+    }
 
 	// rotation around the sun
 	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
@@ -26,11 +29,13 @@ void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::m
 	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
 
 	setMatrices(MVMatrix, ProjMatrix);
+
+    return MVMatrix;
 }
 
-void GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement) {
+glm::mat4 GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const float refDiameter, const glm::mat4 &ProjMatrix, float time, const GLuint *textures, const GLsizei sphere_nb_vertices, int deplacement) {
     render();
-    updatePosition(globalMVMatrix, ProjMatrix, time, deplacement);
+    glm::mat4 MVMatrix = updatePosition(globalMVMatrix, refDiameter, ProjMatrix, time, deplacement);
 
     // Set textures
     glActiveTexture(GL_TEXTURE0);
@@ -40,6 +45,8 @@ void GN_Astrobject::display(const glm::mat4 &globalMVMatrix, const glm::mat4 &Pr
     glDrawArrays(GL_TRIANGLES, 0, sphere_nb_vertices);
 
     glBindTexture(GL_TEXTURE_2D, 0); // Unbind texture from TU 0
+
+    return MVMatrix;
 }
 
 void GN_Astrobject::bindTexture(GLuint *textures) {
@@ -67,4 +74,8 @@ std::unique_ptr<Image> GN_Astrobject::_loadImage(const FilePath &filepath) {
 
 GLuint GN_Astrobject::textureIndex() const {
 	return _textureIndex;
+}
+
+GLfloat GN_Astrobject::getDiameter() const {
+    return _diameter;
 }
