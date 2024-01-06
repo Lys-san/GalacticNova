@@ -34,7 +34,7 @@ public:
 		GLfloat     diameter,
 		GN_Point    barycenter,
 		GLfloat     aphelion, // Semi-major axis for satellite
-		GLfloat     perihelion, // excentricity for satellite
+		GLfloat     perihelion,
 		GLfloat     excentricity,
 		double      orbitalPeriod,
 		double      lengthOfDays,
