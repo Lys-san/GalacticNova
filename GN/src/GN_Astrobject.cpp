@@ -20,7 +20,7 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
     }
 
 	// rotation around the sun
-	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
+	MVMatrix = glm::rotate(MVMatrix, time*(float)_orbitalPeriod/10000.f, glm::vec3(0, 1, 0));
 	// translation
 	MVMatrix = glm::translate(MVMatrix, glm::vec3(deplacement, 0, 0)); //-ratio*_aphelion
 	// scale
