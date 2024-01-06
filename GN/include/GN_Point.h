@@ -1,5 +1,5 @@
 /**
- * Author        : Lysandre M. (lysandre.macke@edu.univ-eiffel.fr)
+ * Author        : Lysandre M. (lysandre.macke@edu.univ-eiffel.fr) and Lori F. (lori.foulon@edu.univ-eiffel.fr)
  * Created       : 01-04-2024
  * Last modified : 01-04-2024 */
 

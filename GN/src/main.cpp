@@ -35,126 +35,119 @@ int main(int argc, char** argv) {
   // Program program = Visualizer::initProgram(applicationPath);
 
   // create our astrobjects
-  GN_Astrobject sun(applicationPath,
-                    "Sun",
-                    700000.f,
-                    GN_Point(0.f, 0.f, 0.f),
-                    0.f,
-                    0.f,
-                    0,
-                    0,
-                    0,
-                    applicationPath.dirPath() + "../../assets/textures/SunMap.jpg",
-                    0
-                    );
-
-
+    GN_Astrobject sun(applicationPath,
+        "Sun",
+        1400000.f,
+        GN_Point(0.f, 0.f, 0.f),
+        0.f,
+        0.f,
+        0,
+        600.f,
+        0,
+        applicationPath.dirPath() + "../../assets/textures/SunMap.jpg",
+        0
+        );
 
     GN_Astrobject mercury(applicationPath,
-                "Mercury",
-                2436.f, // making bigger for better view
-                GN_Point(0.f, 0.f, 0.f),
-                69.8f,
-                46.f,
-                88.f,
-                0,
-                0,
-                applicationPath.dirPath() + "../../assets/textures/MercuryMap.jpg",
-                1
-                );
+        "Mercury",
+        4879.f,
+        GN_Point(0.f, 0.f, 0.f),
+        69.8f,
+        46.f,
+        88.f,
+        4222.6,
+        7.,
+        applicationPath.dirPath() + "../../assets/textures/MercuryMap.jpg",
+        1
+        );
 
     GN_Astrobject venus(applicationPath,
-            "Venus",
-            6052.f, // making bigger for better view
-            GN_Point(0.f, 0.f, 0.f),
-            108.9f,
-            107.5f,
-            226.7f,
-            0,
-            0,
-            applicationPath.dirPath() + "../../assets/textures/VenusMap.jpg",
-            2
-            );
+        "Venus",
+        12104.f,
+        GN_Point(0.f, 0.f, 0.f),
+        108.9f,
+        107.5f,
+        226.7f,
+        2802.,
+        3.4,
+        applicationPath.dirPath() + "../../assets/textures/VenusMap.jpg",
+        2
+        );
 
     GN_Astrobject earth(applicationPath,
-                    "Earth",
-                    6378.f, // making bigger for better view
-                    GN_Point(0.f, 0.f, 0.f),
-                    152.1f,
-                    147.1f,
-                    365.2,
-                    0,
-                    0,
-                    applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg",
-                    3
-                    );
+        "Earth",
+        12756.f,
+        GN_Point(0.f, 0.f, 0.f),
+        152.1f,
+        147.1f,
+        365.2,
+        24.,
+        0.,
+        applicationPath.dirPath() + "../../assets/textures/EarthMap.jpg",
+        3
+        );
 
     GN_Astrobject mars(applicationPath,
-            "Mars",
-            3396.f, // making bigger for better view
-            GN_Point(0.f, 0.f, 0.f),
-            //249.3f,
-            200.f,
-            206.7f,
-            365.2,
-            0,
-            0,
-            applicationPath.dirPath() + "../../assets/textures/MarsMap.jpg",
-            4
-            );
+        "Mars",
+        6792.f,
+        GN_Point(0.f, 0.f, 0.f),
+        249.3f,
+        206.7f,
+        687.0,
+        24.7,
+        1.8,
+        applicationPath.dirPath() + "../../assets/textures/MarsMap.jpg",
+        4
+        );
 
     GN_Astrobject jupiter(applicationPath,
-            "Jupiter",
-            71492.f, // making bigger for better view
-            GN_Point(0.f, 0.f, 0.f),
-            //816.4f,
-            250.f,
-            740.6f,
-            4331.f,
-            0,
-            0,
-            applicationPath.dirPath() + "../../assets/textures/JupiterMap.jpg",
-            5
-            );
+        "Jupiter",
+        142984.f,
+        GN_Point(0.f, 0.f, 0.f),
+        816.4f,
+        740.6f,
+        4331.f,
+        9.9,
+        1.3,
+        applicationPath.dirPath() + "../../assets/textures/JupiterMap.jpg",
+        5
+        );
 
     GN_Astrobject saturn(applicationPath,
-            "Saturn",
-            60268.f, // making bigger for better view
-            GN_Point(0.f, 0.f, 0.f),
-            //1506.5f,
-            300.f,
-            1357.6f,
-            10747.f,
-            0,
-            0,
-            applicationPath.dirPath() + "../../assets/textures/SaturnMap.jpg",
-            6
-            );
+        "Saturn",
+        120536.f,
+        GN_Point(0.f, 0.f, 0.f),
+        1506.5f,
+        1357.6f,
+        10747.f,
+        10.7,
+        2.5,
+        applicationPath.dirPath() + "../../assets/textures/SaturnMap.jpg",
+        6
+        );
 
     GN_Astrobject uranus(applicationPath,
-            "Uranus",
-            25559.f, // making bigger for better view
-            GN_Point(0.f, 0.f, 0.f),
-            //3001.4f,
-            400.f,
-            2732.7f,
-            30689.f,
-            0,
-            0,
-            applicationPath.dirPath() + "../../assets/textures/UranusMap.jpg",
-            7
-            );
+        "Uranus",
+        51118.f,
+        GN_Point(0.f, 0.f, 0.f),
+        3001.4f,
+        2732.7f,
+        30689.f,
+        17.2,
+        0.8,
+        applicationPath.dirPath() + "../../assets/textures/UranusMap.jpg",
+        7
+        );
 
     GN_Astrobject neptune(applicationPath,
         "Neptune",
-        24764.f, // making bigger for better view
+        49528.f,
         GN_Point(0.f, 0.f, 0.f),
-        //4558.9f,
-        450.f,
+        4558.9f,
         4471.1f,
         59800.f,
-        0,
-        0,
+        16.1,
+        1.8,
         applicationPath.dirPath() + "../../assets/textures/NeptuneMap.jpg",
         8
         );
@@ -163,12 +156,11 @@ int main(int argc, char** argv) {
         "Pluto",
         2376.f, // full diameter
         GN_Point(0.f, 0.f, 0.f),
-        //7375.9f,
-        550.f,
+        7375.9f,
         4436.8f,
         90560.f,
-        0,
-        0,
+        153.3,
+        17.2,
         applicationPath.dirPath() + "../../assets/textures/PlutoMap.jpg",
         9
         );

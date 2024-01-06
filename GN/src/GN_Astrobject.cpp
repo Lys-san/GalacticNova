@@ -14,7 +14,7 @@ void GN_Astrobject::setMatrices(const glm::mat4& MVMatrix, const glm::mat4& Proj
 void GN_Astrobject::updatePosition(const glm::mat4 &globalMVMatrix, const glm::mat4 &ProjMatrix, float time, int deplacement) {
 	glm::mat4 MVMatrix = globalMVMatrix;
 
-	const float ratio = _radius/SUN_RADIUS;
+	const float ratio = _diameter/SUN_DIAMETER;
 
 	// rotation around the sun
 	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));

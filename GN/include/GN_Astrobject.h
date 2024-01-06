@@ -1,7 +1,7 @@
 /**
- * Author        : Lysandre M. (lysandre.macke@edu.univ-eiffel.fr)
+ * Authors        : Lysandre M. (lysandre.macke@edu.univ-eiffel.fr) and Lori F. (lori.foulon@edu.univ-eiffel.fr)
  * Created       : 12-29-2023
- * Last modified : 01-04-2024 */
+ * Last modified : 01-06-2024 */
 
 #ifndef GN_ASTRO_H
 #define GN_ASTRO_H
@@ -17,17 +17,16 @@
 #include "GN_Point.h"
 #include <iostream>
 
-
 using namespace glimac;
 
-const GLfloat SUN_RADIUS = 70000.f;
+const GLfloat SUN_DIAMETER = 1400000.f;
 
 class GN_Astrobject {
 public:
 
 	GN_Astrobject(const FilePath& applicationPath,
 		std::string name,
-		GLfloat     radius,
+		GLfloat     diameter,
 		GN_Point    barycenter,
 		GLfloat     aphelion, 
 		GLfloat     perihelion,
@@ -39,7 +38,7 @@ public:
 		) :
 	_program(loadProgram(applicationPath.dirPath() + "shaders/3D.vs.glsl",
                               applicationPath.dirPath() + "shaders/tex3D.fs.glsl")),
-	_radius (radius),
+	_diameter (diameter),
 	_barycenter(barycenter),
 	_aphelion(aphelion),
 	_perihelion(perihelion),
@@ -89,16 +88,12 @@ public:
 
 	GLuint textureIndex() const;
 
-
 private:
 	static std::unique_ptr<Image> _loadImage(const FilePath &filepath);
 
-	
-
-
 	// base attributes
 	Program                _program;
-	GLfloat                _radius;
+	GLfloat                _diameter;
 	GN_Point               _barycenter;
 	GLfloat                _aphelion;
 	GLfloat                _perihelion;
