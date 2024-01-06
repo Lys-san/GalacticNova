@@ -25,7 +25,12 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 	// translation
 
 	// radius from current astrobject <--> other astrobject it's orbiting around 
-	double radius = (_excentricity == 0) ? 0 : 1 - _excentricity*cos((360/_orbitalPeriod)*(time));
+	double radius = 0;
+	if(_orbitalPeriod != 0) {
+		int day = (int)time % (int)_orbitalPeriod;
+		radius = 1 - _excentricity*cos((360/_orbitalPeriod/100000.f)*(day));
+	}
+
 	radius *= 50;
 
 	MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0));
