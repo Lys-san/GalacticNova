@@ -37,30 +37,19 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 
 	if(_name == "Mercury") {
 		std::cout << _aphelion << " - " << radius << " - " << _perihelion << std::endl;
-		std::cout << "a, b, c : " << a << " - " << b << " - " << c << std::endl;
 	}
 
 	MVMatrix = glm::translate(MVMatrix, glm::vec3(x/5, 0, y/5));
 
-	// // radius from current astrobject <--> other astrobject it's orbiting around 
-	// double radius = 0;
-	// if(_orbitalPeriod != 0) {
-	// 	float day = fmod(time, _orbitalPeriod);
-	// 	//radius = 1 - _excentricity*cos((360/_orbitalPeriod/100000.f)*(day));
-	// 	radius = (day*_perihelion)/(_orbitalPeriod);
-	// 	// std::cout << _aphelion << " - " << radius << " - " << _perihelion << std::endl;
-	// }
-
-	// radius *= 50;
-
-	// MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0));
-	// scale
+	// scale bigger for each planet
 	if(_name != "Sun") {
 		ratio *= 15;
 	}
 	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
+	// orbital inclination
+	MVMatrix = glm::rotate(MVMatrix, (float)_orbitalInclination, glm::vec3(0, 0, 1));
 	// self rotation
-	MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
+	MVMatrix = glm::rotate(MVMatrix, -time, glm::vec3(0, 1, 0));
 
 	setMatrices(MVMatrix, ProjMatrix);
 
@@ -115,15 +104,12 @@ void GN_Astrobject::generateAsteroidsMatrices() {
 	    float z = cos(angle) * radius + displacement;
 	    model = glm::translate(model, glm::vec3(x, y, z));
 
-	    // 2. scale: scale between 0.05 and 0.25f
 	    float scale = (rand() % 10) / 1000.0f + 0.025;
 	    model = glm::scale(model, glm::vec3(scale));
 
-	    // 3. rotation: add random rotation around a (semi)randomly picked rotation axis vector
 	    float rotAngle = (rand() % 360);
 	    model = glm::rotate(model, rotAngle, glm::vec3(0.4f, 0.6f, 0.8f));
 
-	    // 4. now add to list of matrices
 	    _asterMatrices[i] = model;
 
 	    _hasRings = true;
