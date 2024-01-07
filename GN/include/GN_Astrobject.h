@@ -64,8 +64,6 @@ public:
 		GLIMAC_CHECK_GLINT(_uTextureRef      = glGetUniformLocation(_program.getGLId(), "uTexture"));
 
 		glActiveTexture(GL_TEXTURE0);
-
-		// init spheres
 	}
 
 	~GN_Astrobject() {};

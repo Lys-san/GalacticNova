@@ -536,6 +536,24 @@ int main(int argc, char** argv) {
         );
 
 
+
+    GN_Astrobject starrySky(applicationPath,
+      "starry sky",
+      pow(10, 10),
+      GN_Point(0.f, 0.f, 0.f),
+      0.f,
+      0.f,
+      0.f,
+      0.f,
+      0.f,
+      0.f,
+      applicationPath.dirPath() + "../../assets/textures/starmap.jpg",
+      98,
+      false
+      );
+
+
+
   // Init rendering and camera
   glEnable(GL_DEPTH_TEST); // Enable Depth test
   glm::mat4 ProjMatrix = glm::perspective(glm::radians(70.f), window_ar, 0.1f, 100.f); 
@@ -621,6 +639,8 @@ int main(int argc, char** argv) {
   nereid.bindTexture(textures);
   charon.bindTexture(textures);
 
+  starrySky.bindTexture(textures);
+
   // for rock too
 	const GLenum min_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR...
 	const GLenum mag_filter = GL_LINEAR; // GL_NEAREST, GL_LINEAR
@@ -704,6 +724,9 @@ int main(int argc, char** argv) {
 
     // Compute global matrices
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
+
+    // === Starry sky ===
+    // starrySky.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === SUN ===
     sun.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
