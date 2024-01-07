@@ -32,10 +32,8 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 		float a = c + _perihelion;
 		float b = a*sqrt(1 - pow(_excentricity, 2));
 
-		float angle = fmod(_orbitalPeriod*time/100., 360);
+		float angle = _orbitalPeriod == 0 ? fmod(time, 360) : fmod(_orbitalPeriod*time/100., 360);
 		angle = angle * 3.1415/180.; // convert to radian
-
-		float r_squared = sqrt(pow(b, 2)/(1 - (pow(_excentricity, 2) * pow(cos(angle), 2))));
 
 		float x = c + a*cos(angle);
 		float y = b*sin(angle);
