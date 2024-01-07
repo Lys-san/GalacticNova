@@ -193,8 +193,9 @@ int main(int argc, char** argv) {
         "Moon",
         3475.f,
         GN_Point(0.f, 0.f, 0.f),
-        384400.f,
-        -1.5f, // Just for debugMode
+        //384400.f,
+        1.5f,
+        1.5f, // Just for debugMode
         0.0549f,
         0.,
         0.,
@@ -208,8 +209,8 @@ int main(int argc, char** argv) {
         "Phobos",
         1348.62f, // can't find the radius or diameter
         GN_Point(0.f, 0.f, 0.f),
-        9378.f,
-        -1.5f, // Just for debugMode
+        1.5f,
+        1.5f, // Just for debugMode
         0.0151f,
         0.,
         0.,
@@ -223,8 +224,8 @@ int main(int argc, char** argv) {
         "Deimos",
         425.88f,
         GN_Point(0.f, 0.f, 0.f),
-        23459.f,
-        -2.5f, // Just for debugMode
+        2.5f,
+        2.5f, // Just for debugMode
         0.0005f,
         0.,
         0.,
@@ -238,8 +239,8 @@ int main(int argc, char** argv) {
         "Callisto",
         4821.f,
         GN_Point(0.f, 0.f, 0.f),
-        1882700.f,
-        -1.5f, // Just for debugMode
+        1.5f,
+        1.5f, // Just for debugMode
         0.007f,
         0.,
         0.,
@@ -253,8 +254,8 @@ int main(int argc, char** argv) {
         "Ganymede",
         5262.f,
         GN_Point(0.f, 0.f, 0.f),
-        1070400.f,
-        -2.f, // Just for debugMode
+        2.f,
+        2.f, // Just for debugMode
         0.001f,
         0.,
         0.,
@@ -268,8 +269,8 @@ int main(int argc, char** argv) {
         "Europa",
         3122.f, 
         GN_Point(0.f, 0.f, 0.f),
-        671100.f,
-        -3.f, // Just for debugMode
+        3.f,
+        3.f, // Just for debugMode
         0.009f,
         0.,
         0.,
@@ -283,8 +284,8 @@ int main(int argc, char** argv) {
         "Io",
         3643.f,
         GN_Point(0.f, 0.f, 0.f),
-        421800.f,
-        -4.f, // Just for debugMode
+        4.f,
+        4.f, // Just for debugMode
         0.004f,
         0.,
         0.,
@@ -298,8 +299,8 @@ int main(int argc, char** argv) {
         "Mimas",
         397.3f,
         GN_Point(0.f, 0.f, 0.f),
-        185.52f,
-        -2.5f, // Just for debugMode
+        2.5f,
+        2.5f, // Just for debugMode
         0.0202f,
         0.,
         0.,
@@ -313,8 +314,8 @@ int main(int argc, char** argv) {
         "Enceladus",
         504.f,
         GN_Point(0.f, 0.f, 0.f),
-        238.02f,
-        -2.75f, // Just for debugMode
+        2.75f,
+        2.75f, // Just for debugMode
         0.0045f,
         0.,
         0.,
@@ -328,8 +329,8 @@ int main(int argc, char** argv) {
         "Tethys",
         1061.3f,
         GN_Point(0.f, 0.f, 0.f),
-        294.66f,
-        -3.f, // Just for debugMode
+        3.f,
+        3.f, // Just for debugMode
         0.f,
         0.,
         0.,
@@ -343,8 +344,8 @@ int main(int argc, char** argv) {
         "Dione",
         1122.7f,
         GN_Point(0.f, 0.f, 0.f),
-        377.40f,
-        -3.5f, // Just for debugMode
+        3.5f,
+        3.5f, // Just for debugMode
         0.0022f,
         0.,
         0.,
@@ -358,8 +359,8 @@ int main(int argc, char** argv) {
         "Rhea",
         1526.7f,
         GN_Point(0.f, 0.f, 0.f),
-        527.04f,
-        -4.f, // Just for debugMode
+        4.f,
+        4.f, // Just for debugMode
         0.0010f,
         0.,
         0.,
@@ -373,8 +374,8 @@ int main(int argc, char** argv) {
         "Titan",
         2575.f,
         GN_Point(0.f, 0.f, 0.f),
-        1221.87f,
-        -4.5f, // Just for debugMode
+        4.5f,
+        4.5f, // Just for debugMode
         0.0292f,
         0.,
         0.,
@@ -388,8 +389,8 @@ int main(int argc, char** argv) {
         "Hyperion",
         277.3f,
         GN_Point(0.f, 0.f, 0.f),
-        1500.93f,
-        -5.f, // Just for debugMode
+        5.f,
+        5.f, // Just for debugMode
         0.1042f,
         0.,
         0.,
@@ -403,8 +404,8 @@ int main(int argc, char** argv) {
         "Iapetus",
         1468.7f,
         GN_Point(0.f, 0.f, 0.f),
-        3560.85f,
-        -5.5f, // Just for debugMode
+        5.5f,
+        5.5f, // Just for debugMode
         0.0283f,
         0.,
         0.,
@@ -418,8 +419,8 @@ int main(int argc, char** argv) {
         "Ariel",
         1157.8f,
         GN_Point(0.f, 0.f, 0.f),
-        190900.f,
-        -2.5f, // Just for debugMode
+        2.5f,
+        2.5f, // Just for debugMode
         0.0012f,
         0.,
         0.,
@@ -433,8 +434,8 @@ int main(int argc, char** argv) {
         "Umbriel",
         1169.4f,
         GN_Point(0.f, 0.f, 0.f),
-        266000.f,
-        -2.75f, // Just for debugMode
+        2.75f,
+        2.75f, // Just for debugMode
         0.0039f,
         0.,
         0.,
@@ -448,8 +449,8 @@ int main(int argc, char** argv) {
         "Titania",
         1577.8f,
         GN_Point(0.f, 0.f, 0.f),
-        436300.f,
-        -3.f, // Just for debugMode
+        3.f,
+        3.f, // Just for debugMode
         0.0011f,
         0.,
         0.,
@@ -463,8 +464,8 @@ int main(int argc, char** argv) {
         "Oberon",
         1522.8f,
         GN_Point(0.f, 0.f, 0.f),
-        583500.f,
-        -3.5f, // Just for debugMode
+        3.5f,
+        3.5f, // Just for debugMode
         0.0014f,
         0.,
         0.,
@@ -478,8 +479,8 @@ int main(int argc, char** argv) {
         "Miranda",
         471.4f,
         GN_Point(0.f, 0.f, 0.f),
-        129900.f,
-        -4.f, // Just for debugMode
+        4.f,
+        4.f, // Just for debugMode
         0.0013f,
         0.,
         0.,
@@ -493,8 +494,8 @@ int main(int argc, char** argv) {
         "Triton",
         2706.8f,
         GN_Point(0.f, 0.f, 0.f),
-        354760.f,
-        -3.f, // Just for debugMode
+        3.f,
+        3.f, // Just for debugMode
         0.000016f,
         0.,
         0.,
@@ -508,8 +509,8 @@ int main(int argc, char** argv) {
         "Nereid",
         340.f,
         GN_Point(0.f, 0.f, 0.f),
-        5513400.f,
-        -3.5f, // Just for debugMode
+        3.5f,
+        3.5f, // Just for debugMode
         0.7512f,
         0.,
         0.,
@@ -523,8 +524,8 @@ int main(int argc, char** argv) {
         "Charon",
         1212, // radius = 606
         GN_Point(0.f, 0.f, 0.f),
-        19596.f,
-        -2.f, // Just for debugMode
+        2.f,
+        2.f, // Just for debugMode
         0.f,
         0.,
         0.,
