@@ -20,59 +20,44 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
         ratio *= 10;
     }
 
-	// rotation around the sun
-	float c = (_aphelion - _perihelion)/2.;
-	float a = c + _perihelion;
-	float b = a*sqrt(1 - pow(_excentricity, 2));
-
-	float angle = fmod(_orbitalPeriod*time/10., 360);
-	angle = angle * 3.1415/180.; // convert to radian
-
-	float r_squared = sqrt(pow(b, 2)/(1 - (pow(_excentricity, 2) * pow(cos(angle), 2))));
-
-	float x = c + a*cos(angle);
-	float y = b*sin(angle);
-
-	float radius = sqrt(pow(x, 2) + pow(y, 2));
-
-	if(_name == "Mercury") {
-		std::cout << _aphelion << " - " << radius << " - " << _perihelion << std::endl;
-	}
-
-	MVMatrix = glm::translate(MVMatrix, glm::vec3(x/5, 0, y/5));
-
-
     if(debugMode){
         MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
         float move = (_isSatellite)? -_perihelion : ((_name == "Sun")? 0:-(_perihelion/100) - 10);
         MVMatrix = glm::translate(MVMatrix, glm::vec3(move, 0, 0));
     } else {
-        // rotation around the sun
-        MVMatrix = glm::rotate(MVMatrix, (time)*(float)_orbitalPeriod/100000.f, glm::vec3(0, 1, 0));
-        // translation
 
-        // radius from current astrobject <--> other astrobject it's orbiting around 
-        double radius = 0;
-        if(_orbitalPeriod != 0) {
-            int day = (int)time % (int)_orbitalPeriod;
-            radius = 1 - _excentricity*cos((360/_orbitalPeriod/100000.f)*(day));
-        }
+		// rotation around the sun
+		float c = (_aphelion - _perihelion)/2.;
+		float a = c + _perihelion;
+		float b = a*sqrt(1 - pow(_excentricity, 2));
 
-        radius *= 50;
+		float angle = fmod(_orbitalPeriod*time/100., 360);
+		angle = angle * 3.1415/180.; // convert to radian
 
-        MVMatrix = glm::translate(MVMatrix, glm::vec3(radius, 0, 0));
-    }
+		float r_squared = sqrt(pow(b, 2)/(1 - (pow(_excentricity, 2) * pow(cos(angle), 2))));
 
-    // scale bigger for each planet
-	if(_name != "Sun") {
-		ratio *= 15;
+		float x = c + a*cos(angle);
+		float y = b*sin(angle);
+
+		float radius = sqrt(pow(x, 2) + pow(y, 2));
+
+		if(_name == "Mercury") {
+			std::cout << _aphelion << " - " << radius << " - " << _perihelion << std::endl;
+		}
+
+		MVMatrix = glm::translate(MVMatrix, glm::vec3(x/5, 0, y/5));
+		
+	    // scale bigger for each planet
+		if(_name != "Sun") {
+			ratio *= 15;
+		}
+
+		MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
+		// orbital inclination
+		MVMatrix = glm::rotate(MVMatrix, (float)_orbitalInclination, glm::vec3(0, 0, 1));
+		// self rotation
+		MVMatrix = glm::rotate(MVMatrix, -time, glm::vec3(0, 1, 0));
 	}
-
-	MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
-	// orbital inclination
-	MVMatrix = glm::rotate(MVMatrix, (float)_orbitalInclination, glm::vec3(0, 0, 1));
-	// self rotation
-	MVMatrix = glm::rotate(MVMatrix, -time, glm::vec3(0, 1, 0));
 
 	setMatrices(MVMatrix, ProjMatrix);
 
