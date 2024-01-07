@@ -194,7 +194,7 @@ int main(int argc, char** argv) {
         3475.f,
         GN_Point(0.f, 0.f, 0.f),
         384400.f,
-        0.,
+        -1.5f, // Just for debugMode
         0.0549f,
         0.,
         0.,
@@ -209,7 +209,7 @@ int main(int argc, char** argv) {
         1348.62f, // can't find the radius or diameter
         GN_Point(0.f, 0.f, 0.f),
         9378.f,
-        0.,
+        -1.5f, // Just for debugMode
         0.0151f,
         0.,
         0.,
@@ -224,7 +224,7 @@ int main(int argc, char** argv) {
         425.88f,
         GN_Point(0.f, 0.f, 0.f),
         23459.f,
-        0.,
+        -2.5f, // Just for debugMode
         0.0005f,
         0.,
         0.,
@@ -239,7 +239,7 @@ int main(int argc, char** argv) {
         4821.f,
         GN_Point(0.f, 0.f, 0.f),
         1882700.f,
-        0.,
+        -1.5f, // Just for debugMode
         0.007f,
         0.,
         0.,
@@ -254,7 +254,7 @@ int main(int argc, char** argv) {
         5262.f,
         GN_Point(0.f, 0.f, 0.f),
         1070400.f,
-        0.,
+        -2.f, // Just for debugMode
         0.001f,
         0.,
         0.,
@@ -269,7 +269,7 @@ int main(int argc, char** argv) {
         3122.f, 
         GN_Point(0.f, 0.f, 0.f),
         671100.f,
-        0.,
+        -3.f, // Just for debugMode
         0.009f,
         0.,
         0.,
@@ -284,7 +284,7 @@ int main(int argc, char** argv) {
         3643.f,
         GN_Point(0.f, 0.f, 0.f),
         421800.f,
-        0.,
+        -4.f, // Just for debugMode
         0.004f,
         0.,
         0.,
@@ -299,7 +299,7 @@ int main(int argc, char** argv) {
         397.3f,
         GN_Point(0.f, 0.f, 0.f),
         185.52f,
-        0.,
+        -2.5f, // Just for debugMode
         0.0202f,
         0.,
         0.,
@@ -314,7 +314,7 @@ int main(int argc, char** argv) {
         504.f,
         GN_Point(0.f, 0.f, 0.f),
         238.02f,
-        0.,
+        -2.75f, // Just for debugMode
         0.0045f,
         0.,
         0.,
@@ -329,7 +329,7 @@ int main(int argc, char** argv) {
         1061.3f,
         GN_Point(0.f, 0.f, 0.f),
         294.66f,
-        0.,
+        -3.f, // Just for debugMode
         0.f,
         0.,
         0.,
@@ -344,7 +344,7 @@ int main(int argc, char** argv) {
         1122.7f,
         GN_Point(0.f, 0.f, 0.f),
         377.40f,
-        0.,
+        -3.5f, // Just for debugMode
         0.0022f,
         0.,
         0.,
@@ -359,7 +359,7 @@ int main(int argc, char** argv) {
         1526.7f,
         GN_Point(0.f, 0.f, 0.f),
         527.04f,
-        0.,
+        -4.f, // Just for debugMode
         0.0010f,
         0.,
         0.,
@@ -374,7 +374,7 @@ int main(int argc, char** argv) {
         2575.f,
         GN_Point(0.f, 0.f, 0.f),
         1221.87f,
-        0.,
+        -4.5f, // Just for debugMode
         0.0292f,
         0.,
         0.,
@@ -389,7 +389,7 @@ int main(int argc, char** argv) {
         277.3f,
         GN_Point(0.f, 0.f, 0.f),
         1500.93f,
-        0.,
+        -5.f, // Just for debugMode
         0.1042f,
         0.,
         0.,
@@ -404,7 +404,7 @@ int main(int argc, char** argv) {
         1468.7f,
         GN_Point(0.f, 0.f, 0.f),
         3560.85f,
-        0.,
+        -5.5f, // Just for debugMode
         0.0283f,
         0.,
         0.,
@@ -419,7 +419,7 @@ int main(int argc, char** argv) {
         1157.8f,
         GN_Point(0.f, 0.f, 0.f),
         190900.f,
-        0.,
+        -2.5f, // Just for debugMode
         0.0012f,
         0.,
         0.,
@@ -434,7 +434,7 @@ int main(int argc, char** argv) {
         1169.4f,
         GN_Point(0.f, 0.f, 0.f),
         266000.f,
-        0.,
+        -2.75f, // Just for debugMode
         0.0039f,
         0.,
         0.,
@@ -449,7 +449,7 @@ int main(int argc, char** argv) {
         1577.8f,
         GN_Point(0.f, 0.f, 0.f),
         436300.f,
-        0.,
+        -3.f, // Just for debugMode
         0.0011f,
         0.,
         0.,
@@ -464,7 +464,7 @@ int main(int argc, char** argv) {
         1522.8f,
         GN_Point(0.f, 0.f, 0.f),
         583500.f,
-        0.,
+        -3.5f, // Just for debugMode
         0.0014f,
         0.,
         0.,
@@ -479,7 +479,7 @@ int main(int argc, char** argv) {
         471.4f,
         GN_Point(0.f, 0.f, 0.f),
         129900.f,
-        0.,
+        -4.f, // Just for debugMode
         0.0013f,
         0.,
         0.,
@@ -494,7 +494,7 @@ int main(int argc, char** argv) {
         2706.8f,
         GN_Point(0.f, 0.f, 0.f),
         354760.f,
-        0.,
+        -3.f, // Just for debugMode
         0.000016f,
         0.,
         0.,
@@ -509,7 +509,7 @@ int main(int argc, char** argv) {
         340.f,
         GN_Point(0.f, 0.f, 0.f),
         5513400.f,
-        0.f,
+        -3.5f, // Just for debugMode
         0.7512f,
         0.,
         0.,
@@ -524,8 +524,8 @@ int main(int argc, char** argv) {
         1212, // radius = 606
         GN_Point(0.f, 0.f, 0.f),
         19596.f,
+        -2.f, // Just for debugMode
         0.f,
-        0.,
         0.,
         0.,
         0.00005,
@@ -639,6 +639,7 @@ int main(int argc, char** argv) {
 
   bool done = false;
   bool animation = false;
+  bool debugMode = false;
   float time = 0.f;
   while (!done) {
     // Event loop:
@@ -667,6 +668,9 @@ int main(int argc, char** argv) {
           break;
         case SDLK_t:
           animation = !animation;
+          break;
+        case SDLK_b:
+          debugMode = !debugMode;
           break;
         case SDLK_ESCAPE:
           done = true; // Leave the loop after this iteration
@@ -701,110 +705,110 @@ int main(int argc, char** argv) {
     glm::mat4 global_MVMatrix = camera.getViewMatrix();
 
     // === SUN ===
-    sun.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, 0);
+    sun.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Mercury ===
-    mercury.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -11);
+    mercury.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === VENUS === 
-    venus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -12);
+    venus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === EARTH === 
-    glm::mat4 earthMVMatrix = earth.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -13);
+    glm::mat4 earthMVMatrix = earth.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === MARS === 
-    glm::mat4 marsMVMatrix = mars.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -14);
+    glm::mat4 marsMVMatrix = mars.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Jupiter === 
-    glm::mat4 jupiterMVMatrix = jupiter.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -18);
+    glm::mat4 jupiterMVMatrix = jupiter.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Saturn === 
-    glm::mat4 saturnMVMatrix = saturn.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -22);
+    glm::mat4 saturnMVMatrix = saturn.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Uranus ===
-    glm::mat4 uranusMVMatrix = uranus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -26);
+    glm::mat4 uranusMVMatrix = uranus.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
     
     // === Neptune ===
-    glm::mat4 neptuneMVMatrix = neptune.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -28);
+    glm::mat4 neptuneMVMatrix = neptune.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
     
     // === Pluto ===
-    glm::mat4 plutoMVMatrix = pluto.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, -30);
+    glm::mat4 plutoMVMatrix = pluto.display(global_MVMatrix, SUN_DIAMETER, ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // ==== Earth satellites ====
     // === Moon ===
-    moon.display(earthMVMatrix, earth.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+    moon.display(earthMVMatrix, earth.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // ==== Mars satellites ====
     // === Phobos ===
-    phobos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -3);
+    phobos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Deimos ===
-    deimos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+    deimos.display(marsMVMatrix, mars.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // ==== Jupiter satellites ====
     // === Callisto ===
-    callisto.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -13);
+    callisto.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Ganymede ===
-    ganymede.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+    ganymede.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
   
     // === Europa ===
-    europa.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -7);
+    europa.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Io ===
-    io.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -9);
+    io.display(jupiterMVMatrix, jupiter.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // ==== Saturn satellites ====
     // === Mimas ===
-    mimas.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -3);
+    mimas.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Enceladus ===
-    enceladus.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -5);
+    enceladus.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
   
     // === Tethys ===
-    tethys.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -7);
+    tethys.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Dione ===
-    dione.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -9);
+    dione.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Rhea ===
-    rhea.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -11);
+    rhea.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Titan ===
-    titan.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -13);
+    titan.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
   
     // === Hyperion ===
-    hyperion.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -15);
+    hyperion.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Iapetus ===
-    iapetus.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -17);
+    iapetus.display(saturnMVMatrix, saturn.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // ==== Uranus satellites ====
     // === Ariel ===
-    ariel.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3);
+    ariel.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Umbriel ===
-    umbriel.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -5);
+    umbriel.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // === Titania ===
-    titania.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -7);
+    titania.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
   
     // === Oberon ===
-    oberon.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -9);
+    oberon.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // // === Miranda ===
-    miranda.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3); //-11
+    miranda.display(uranusMVMatrix, uranus.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // ==== Neptune satellites ====
     // === Triton ===
-    triton.display(neptuneMVMatrix, neptune.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3);
+    triton.display(neptuneMVMatrix, neptune.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     // === Nereid ===
-    nereid.display(neptuneMVMatrix, neptune.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, -5);
+    nereid.display(neptuneMVMatrix, neptune.getDiameter(), ProjMatrix, time*2, textures, sphere_nb_vertices, debugMode);
 
     // ==== Pluto satellites ====
     // === Charon ===
-    charon.display(plutoMVMatrix, pluto.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, -3);
+    charon.display(plutoMVMatrix, pluto.getDiameter(), ProjMatrix, time, textures, sphere_nb_vertices, debugMode);
 
     glBindVertexArray(0); // Unbind vao (from active VAO)
     // Update the display

@@ -14,6 +14,12 @@ Happy new year ! (I wish could've started this project sooner). Anyway, the GN_A
 
 What a productive day today ! Finally fixed texture stuff and the Astrobjects are done for the basic part (sphere display, texture, movement). Build a minimal and approximative solar system, that needs to be adjusted with ellipses. 
 
+<<<<<<< HEAD
 [01.07.2024]
 
 Didn't even take time to write here those past days. Started working with Lori (we both needed it) and the productivity was boosted. Here, we have a full set of planets with their satellites, including planets with rings. Each of their orbit is correct according to aphelion/perihelion/excentricity, even though their might still be some unhandled stuff with the orbital inclination. 
+=======
+[01.06.2024]
+
+Today we added all the moons required. We also work on the trajectories of the Astrobjects. Staturn and Uranus have rings ! We added a debugMode to see all planets and moons line up
+>>>>>>> 073383830404787ede1db9441b3f9e9cb87ab3d4
