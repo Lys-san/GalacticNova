@@ -22,7 +22,10 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 
     if(debugMode){
         MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
-        float move = (_isSatellite)? -_perihelion : ((_name == "Sun")? 0:-(_perihelion/100) - 10);
+        float move = (_isSatellite)? _perihelion : ((_name == "Sun")? 0:-(_perihelion/100) - 10);
+		if(_name == "Pluto"){
+			move -= 5;
+		}
         MVMatrix = glm::translate(MVMatrix, glm::vec3(move, 0, 0));
         MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
     } else {
@@ -48,19 +51,16 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 			x *=2;
 			y*=2;
 		}
-		if(_name == "Mercury") {
-			std::cout << _aphelion << " - " << radius << " - " << _perihelion << std::endl;
-		}
 
 		MVMatrix = glm::translate(MVMatrix, glm::vec3(x, 0, y));
 
 	    // scale bigger for each planet
-		if(_name != "Sun") {
+		if(_name != "Sun" && !_isSatellite) {
 			ratio *= 15;
 		}
-		if(_isSatellite) {
-			ratio /= 15;
-		}
+		// if(_isSatellite) {
+		// 	ratio /= 15;
+		// }
 
 		MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
 		// orbital inclination

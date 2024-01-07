@@ -222,7 +222,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject deimos(applicationPath,
         "Deimos",
-        425.88f,
+        1277.64f, // real size: 425.88f, // Make it bigger to be able to see it (real size *3)
         GN_Point(0.f, 0.f, 0.f),
         2.5f,
         2.5f, // Just for debugMode
@@ -269,8 +269,8 @@ int main(int argc, char** argv) {
         "Europa",
         3122.f, 
         GN_Point(0.f, 0.f, 0.f),
-        3.f,
-        3.f, // Just for debugMode
+        2.5f,
+        2.5f, // Just for debugMode
         0.009f,
         0.,
         0.,
@@ -284,8 +284,8 @@ int main(int argc, char** argv) {
         "Io",
         3643.f,
         GN_Point(0.f, 0.f, 0.f),
-        4.f,
-        4.f, // Just for debugMode
+        3.f,
+        3.f, // Just for debugMode
         0.004f,
         0.,
         0.,
@@ -297,7 +297,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject mimas(applicationPath,
         "Mimas",
-        397.3f,
+        1191.9f, // real size: 397.3f // Make it bigger to be able to see it (real size *3)
         GN_Point(0.f, 0.f, 0.f),
         2.5f,
         2.5f, // Just for debugMode
@@ -312,7 +312,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject enceladus(applicationPath,
         "Enceladus",
-        504.f,
+        1512.f, // real size: 504.f, // Make it bigger to be able to see it (real size *3)
         GN_Point(0.f, 0.f, 0.f),
         2.75f,
         2.75f, // Just for debugMode
@@ -387,7 +387,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject hyperion(applicationPath,
         "Hyperion",
-        277.3f,
+        831.9f, // real size: 277.3f, // Make it bigger to be able to see it (real size *3)
         GN_Point(0.f, 0.f, 0.f),
         5.f,
         5.f, // Just for debugMode
@@ -477,7 +477,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject miranda(applicationPath,
         "Miranda",
-        471.4f,
+        1414.2f, // real size: 471.4f, // Make it bigger to be able to see it (real size *3)
         GN_Point(0.f, 0.f, 0.f),
         4.f,
         4.f, // Just for debugMode
@@ -507,7 +507,7 @@ int main(int argc, char** argv) {
 
     GN_Astrobject nereid(applicationPath,
         "Nereid",
-        340.f,
+        1020.f, // real size: 340.f, // Make it bigger to be able to see it (real size *3)
         GN_Point(0.f, 0.f, 0.f),
         3.5f,
         3.5f, // Just for debugMode
