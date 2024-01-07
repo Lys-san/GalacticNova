@@ -25,9 +25,6 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-  /*********************************
-   * HERE SHOULD COME THE INITIALIZATION CODE
-   *********************************/
   FilePath applicationPath(argv[0]);
 
   // Shaders loading, compilation and uniforms location
@@ -711,9 +708,6 @@ int main(int argc, char** argv) {
       }
     }
 
-    /*********************************
-     * HERE SHOULD COME THE RENDERING CODE
-     *********************************/
     // Rendering code:
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear rendering buffer
 

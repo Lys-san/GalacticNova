@@ -28,6 +28,7 @@ glm::mat4 GN_Astrobject::updatePosition(const glm::mat4 &refMVMatrix, const floa
 		}
         MVMatrix = glm::translate(MVMatrix, glm::vec3(move, 0, 0));
         MVMatrix = glm::scale(MVMatrix, glm::vec3(ratio, ratio, ratio));
+		MVMatrix = glm::rotate(MVMatrix, time, glm::vec3(0, 1, 0));
     } else {
 
 		// rotation around the sun/the planet
